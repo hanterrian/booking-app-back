@@ -5,18 +5,22 @@ namespace App\Http\Controllers\Api\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\Auth\LoginFormRequest;
 use App\Http\Requests\Api\v1\Auth\RegisterFormRequest;
-use App\Models\User;
+use App\Http\Resources\AuthRegisterUserResource;
+use App\Services\UserAuthService;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
+    public function __construct(private UserAuthService $userAuthService)
+    {
+    }
+
     public function login(LoginFormRequest $request): string
     {
-        $user = User::firstOrFail(['email' => $request->email]);
+        $check = $this->userAuthService->check($request);
 
-        if (!$user && !Hash::check($request->password, $user->password)) {
+        if (!$check) {
             throw ValidationException::withMessages([
                 'email' => [
                     'The provided credentials are incorrect.',
@@ -24,15 +28,17 @@ class AuthController extends Controller
             ]);
         }
 
-        return $user->createToken($user->email.'.token')->plainTextToken;
+        return $check->createToken($check->email.'.token')->plainTextToken;
     }
 
-    public function register(RegisterFormRequest $request)
+    public function register(RegisterFormRequest $request): AuthRegisterUserResource
     {
+        $user = $this->userAuthService->register($request);
 
+        return new AuthRegisterUserResource($user);
     }
 
-    public function logout()
+    public function logout(): void
     {
         Auth::user()->currentAccessToken()->delete();
     }
