@@ -1,3 +1,6 @@
 @extends('admin.template')
 
-@section('title','Login')
+@section('title','Dashboard')
+
+@section('content')
+@endsection
