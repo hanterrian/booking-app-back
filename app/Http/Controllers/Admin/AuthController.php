@@ -26,7 +26,7 @@ class AuthController extends Controller
         $user = User::whereEmail($request->email)->first();
 
         if ($user && $user->hasRole('admin') && Hash::check($request->password, $user->password)) {
-            Auth::login($user);
+            Auth::login($user, true);
 
             return redirect()->route('admin.dashboard');
         } else {
