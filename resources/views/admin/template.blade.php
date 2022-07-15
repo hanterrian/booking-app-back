@@ -85,18 +85,8 @@
 
     @auth
         <main>
-            <div class="d-flex flex-column flex-shrink-0 p-3 col-3">
-                <ul class="nav nav-pills flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{{ route('admin.dashboard') }}">
-                            <svg class="bi me-2" width="16" height="16">
-                                <use xlink:href="#home"></use>
-                            </svg>
-                            Home
-                        </a>
-                    </li>
-                </ul>
-            </div>
+            <x-admin.menu/>
+
             <div class="d-flex flex-column flex-shrink-0 p-3 col-9">
                 @yield('content')
             </div>
