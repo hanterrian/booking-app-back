@@ -6,6 +6,7 @@
 
     <title>Admin - @yield('title')</title>
 
+    @livewireStyles
     @vite(['resources/js/app.js'])
 </head>
 <body>
@@ -58,15 +59,21 @@
 </nav>
 
 <div class="container">
-    @if(count($errors))
-        <div class="alert alert-danger">
-            <ul>
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+    <div class="row">
+        <div class="col-12">
+            @if(session()->has('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            @if(session()->has('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
         </div>
-    @endif
+    </div>
 
     @guest
         <main>
@@ -95,6 +102,8 @@
             </div>
         </main>
     @endauth
+
+    @livewireScripts
 </div>
 </body>
 </html>
