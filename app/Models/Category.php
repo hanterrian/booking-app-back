@@ -39,6 +39,8 @@ class Category extends Model
 {
     use Uuid, SoftDeletes, HasSlug;
 
+    protected $primaryKey = 'uuid';
+
     protected $fillable = [
         'title',
         'slug',

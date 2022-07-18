@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Traits\Uuid;
+use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -45,7 +46,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static \Illuminate\Database\Eloquent\Builder|User permission($permissions)
  * @method static \Illuminate\Database\Eloquent\Builder|User role($roles, $guard = null)
  */
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
     use HasApiTokens, HasFactory, Notifiable, Uuid, HasRoles;
 
@@ -81,4 +82,9 @@ class User extends Authenticatable
         'uuid' => 'string',
         'email_verified_at' => 'datetime',
     ];
+
+    public function canAccessFilament(): bool
+    {
+        return $this->hasRole('admin');
+    }
 }
