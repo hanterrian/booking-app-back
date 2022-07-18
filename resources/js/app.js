@@ -1,5 +1,8 @@
-import './bootstrap';
+import Alpine from 'alpinejs'
+import FormsAlpinePlugin from '../../vendor/filament/forms/dist/module.esm'
 
-import '../sass/app.scss'
+Alpine.plugin(FormsAlpinePlugin)
 
-import * as bootstrap from 'bootstrap'
+window.Alpine = Alpine
+
+Alpine.start()
