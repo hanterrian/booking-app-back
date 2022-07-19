@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasRoles;
 
 /**
@@ -45,10 +47,19 @@ use Spatie\Permission\Traits\HasRoles;
  * @property-read int|null $roles_count
  * @method static \Illuminate\Database\Eloquent\Builder|User permission($permissions)
  * @method static \Illuminate\Database\Eloquent\Builder|User role($roles, $guard = null)
+ * @property int $is_block
+ * @property string|null $block_to
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereBlockTo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereIsBlock($value)
+ * @property string|null $avatar_src
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereAvatarSrc($value)
  */
-class User extends Authenticatable implements FilamentUser
+class User extends Authenticatable implements FilamentUser, HasMedia
 {
-    use HasApiTokens, HasFactory, Notifiable, Uuid, HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, Uuid, HasRoles, InteractsWithMedia;
+
+    public ?string $new_password = null;
+    public ?string $password_repeat = null;
 
     protected $primaryKey = 'uuid';
 
@@ -61,6 +72,9 @@ class User extends Authenticatable implements FilamentUser
         'name',
         'email',
         'password',
+        'is_block',
+        'block_to',
+        'avatar_src',
     ];
 
     /**
@@ -81,6 +95,8 @@ class User extends Authenticatable implements FilamentUser
     protected $casts = [
         'uuid' => 'string',
         'email_verified_at' => 'datetime',
+        'is_block' => 'boolean',
+        'block_to' => 'datetime',
     ];
 
     public function canAccessFilament(): bool

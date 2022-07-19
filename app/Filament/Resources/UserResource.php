@@ -4,12 +4,19 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
 use App\Models\User;
+use Filament\Forms\Components\Card;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Placeholder;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
+use Filament\Tables\Columns\BooleanColumn;
 use Filament\Tables\Columns\TextColumn;
 
 class UserResource extends Resource
@@ -26,19 +33,49 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name')
-                    ->required(),
+                Group::make()
+                    ->schema([
+                        Card::make()
+                            ->schema([
+                                TextInput::make('name')
+                                    ->required()
+                                    ->maxLength(255),
 
-                TextInput::make('email')
-                    ->required(),
+                                TextInput::make('email')
+                                    ->required()
+                                    ->maxLength(255),
+                            ]),
 
-                Placeholder::make('created_at')
-                    ->label('Created Date')
-                    ->content(fn(?User $record): string => $record?->created_at?->diffForHumans() ?? '-'),
+                        Card::make()
+                            ->schema([
+                                SpatieMediaLibraryFileUpload::make('avatar_src')
+                                    ->collection('avatars')
+                                    ->multiple(false),
+                            ])
+                            ->columns(1),
+                    ]),
+                Group::make()
+                    ->schema([
+                        Card::make()
+                            ->schema([
+                                Placeholder::make('Blocking'),
 
-                Placeholder::make('updated_at')
-                    ->label('Last Modified Date')
-                    ->content(fn(?User $record): string => $record?->updated_at?->diffForHumans() ?? '-'),
+                                Toggle::make('is_block'),
+
+                                DatePicker::make('block_to'),
+                            ]),
+
+                        Card::make()
+                            ->schema([
+                                Placeholder::make('Change password'),
+
+                                TextInput::make('new_password')
+                                    ->maxLength(255),
+
+                                TextInput::make('password_repeat')
+                                    ->maxLength(255),
+                            ]),
+                    ]),
             ]);
     }
 
@@ -57,6 +94,16 @@ class UserResource extends Resource
                 TextColumn::make('email')
                     ->searchable()
                     ->sortable(),
+
+                BooleanColumn::make('is_block')
+                    ->toggleable()
+                    ->sortable(),
+
+                TextColumn::make('block_to')
+                    ->date()
+                    ->sortable()
+                    ->toggleable()
+                    ->toggledHiddenByDefault(),
             ]);
     }
 
