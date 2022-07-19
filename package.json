@@ -10,10 +10,11 @@
         "@tailwindcss/typography": "^0.4.1",
         "alpinejs": "^3.4",
         "autoprefixer": "^10.4.7",
+        "cssnano": "^5.1.12",
         "laravel-vite-plugin": "^0.2.1",
-        "postcss": "^8.1.14",
+        "postcss": "^8.4.14",
         "sass": "^1.5.1",
-        "tailwindcss": "^2.0.4",
+        "tailwindcss": "^2.2.19",
         "tippy.js": "^6.3.7",
         "vite": "^2.9.11"
     },
