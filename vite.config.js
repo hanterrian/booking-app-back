@@ -9,14 +9,18 @@ export default defineConfig({
             host: 'localhost',
         },
     },
+    css: {
+        postCss: {
+            plugins: {
+                tailwindcss: {},
+                autoprefixer: {},
+            },
+        },
+    },
     plugins: [
         laravel([
+            'resources/sass/app.scss',
             'resources/js/app.js',
         ]),
     ],
-    resolve: {
-        alias: {
-            '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap'),
-        }
-    },
 });
