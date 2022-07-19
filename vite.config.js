@@ -9,14 +9,6 @@ export default defineConfig({
             host: 'localhost',
         },
     },
-    css: {
-        postCss: {
-            plugins: {
-                tailwindcss: {},
-                autoprefixer: {},
-            },
-        },
-    },
     plugins: [
         laravel([
             'resources/css/app.css',
