@@ -4,10 +4,12 @@ namespace App\Models;
 
 use App\Models\Traits\Uuid;
 use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasAvatar;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -54,7 +56,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property string|null $avatar_src
  * @method static \Illuminate\Database\Eloquent\Builder|User whereAvatarSrc($value)
  */
-class User extends Authenticatable implements FilamentUser, HasMedia
+class User extends Authenticatable implements FilamentUser, HasMedia, HasAvatar
 {
     use HasApiTokens, HasFactory, Notifiable, Uuid, HasRoles, InteractsWithMedia;
 
@@ -102,5 +104,10 @@ class User extends Authenticatable implements FilamentUser, HasMedia
     public function canAccessFilament(): bool
     {
         return $this->hasRole('admin');
+    }
+
+    public function getFilamentAvatarUrl(): ?string
+    {
+        return Storage::disk('avatars')->url($this->avatar_src);
     }
 }

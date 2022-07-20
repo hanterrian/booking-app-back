@@ -7,6 +7,7 @@ use App\Models\User;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Placeholder;
@@ -17,7 +18,9 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables\Columns\BooleanColumn;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Masterminds\HTML5\Parser\FileInputStream;
 
 class UserResource extends Resource
 {
@@ -45,15 +48,8 @@ class UserResource extends Resource
                                     ->required()
                                     ->maxLength(255),
                             ]),
-
-                        Card::make()
-                            ->schema([
-                                SpatieMediaLibraryFileUpload::make('avatar_src')
-                                    ->collection('avatars')
-                                    ->multiple(false),
-                            ])
-                            ->columns(1),
-                    ]),
+                    ])
+                    ->columnSpan(2),
                 Group::make()
                     ->schema([
                         Card::make()
@@ -67,6 +63,14 @@ class UserResource extends Resource
 
                         Card::make()
                             ->schema([
+                                FileUpload::make('avatar_src')
+                                    ->disk('avatars')
+                                    ->image()
+                                    ->avatar(),
+                            ]),
+
+                        Card::make()
+                            ->schema([
                                 Placeholder::make('Change password'),
 
                                 TextInput::make('new_password')
@@ -76,16 +80,16 @@ class UserResource extends Resource
                                     ->maxLength(255),
                             ]),
                     ]),
-            ]);
+            ])
+            ->columns(3);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('uuid')
-                    ->searchable()
-                    ->sortable(),
+                ImageColumn::make('avatar_src')
+                    ->disk('avatars'),
 
                 TextColumn::make('name')
                     ->searchable()
