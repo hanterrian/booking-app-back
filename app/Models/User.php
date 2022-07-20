@@ -9,6 +9,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
@@ -61,7 +62,7 @@ class User extends Authenticatable implements FilamentUser, HasMedia, HasAvatar
     use HasApiTokens, HasFactory, Notifiable, Uuid, HasRoles, InteractsWithMedia;
 
     public ?string $new_password = null;
-    public ?string $password_repeat = null;
+    public ?string $new_password_confirmation = null;
 
     protected $primaryKey = 'uuid';
 

@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\UserResource\Pages;
 use App\Models\User;
 use Filament\Forms\Components\Card;
+use Livewire\Component;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
@@ -20,6 +21,7 @@ use Filament\Resources\Table;
 use Filament\Tables\Columns\BooleanColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Illuminate\Support\Facades\Hash;
 use Masterminds\HTML5\Parser\FileInputStream;
 
 class UserResource extends Resource
@@ -30,7 +32,7 @@ class UserResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'email';
 
-//    protected static ?string $navigationIcon = 'heroicon-o-user-group';
+    protected static ?string $navigationIcon = 'heroicon-o-users';
 
     public static function form(Form $form): Form
     {
@@ -45,8 +47,16 @@ class UserResource extends Resource
                                     ->maxLength(255),
 
                                 TextInput::make('email')
+                                    ->email()
                                     ->required()
                                     ->maxLength(255),
+
+                                TextInput::make('password')
+                                    ->password()
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->dehydrateStateUsing(fn($state) => Hash::make($state))
+                                    ->visible(fn(Component $livewire): bool => $livewire instanceof Pages\CreateUser),
                             ]),
                     ])
                     ->columnSpan(2),
@@ -74,11 +84,20 @@ class UserResource extends Resource
                                 Placeholder::make('Change password'),
 
                                 TextInput::make('new_password')
+                                    ->password()
+                                    ->rules([
+                                        'min:6', 'nullable', 'confirmed',
+                                    ])
                                     ->maxLength(255),
 
-                                TextInput::make('password_repeat')
+                                TextInput::make('new_password_confirmation')
+                                    ->password()
+                                    ->rules([
+                                        'min:6', 'nullable',
+                                    ])
                                     ->maxLength(255),
-                            ]),
+                            ])
+                            ->visible(fn(Component $livewire): bool => $livewire instanceof Pages\EditUser),
                     ]),
             ])
             ->columns(3);
