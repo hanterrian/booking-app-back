@@ -37,27 +37,9 @@ use Spatie\Sluggable\SlugOptions;
  */
 class Category extends Model
 {
-    use Uuid, SoftDeletes, HasSlug;
+    use Uuid, SoftDeletes;
 
     protected $primaryKey = 'uuid';
-
-    protected $fillable = [
-        'title',
-        'slug',
-        'sort',
-        'published',
-    ];
-
-    protected $casts = [
-        'published' => 'boolean',
-    ];
-
-    public function getSlugOptions(): SlugOptions
-    {
-        return SlugOptions::create()
-            ->generateSlugsFrom('title')
-            ->saveSlugsTo('slug');
-    }
 
     public function getRouteKeyName(): string
     {

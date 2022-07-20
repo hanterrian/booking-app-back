@@ -57,12 +57,9 @@ use Spatie\Permission\Traits\HasRoles;
  * @property string|null $avatar_src
  * @method static \Illuminate\Database\Eloquent\Builder|User whereAvatarSrc($value)
  */
-class User extends Authenticatable implements FilamentUser, HasMedia, HasAvatar
+class User extends Authenticatable implements HasAvatar
 {
-    use HasApiTokens, HasFactory, Notifiable, Uuid, HasRoles, InteractsWithMedia;
-
-    public ?string $new_password = null;
-    public ?string $new_password_confirmation = null;
+    use HasApiTokens, HasFactory, Notifiable, Uuid, HasRoles;
 
     protected $primaryKey = 'uuid';
 
@@ -101,11 +98,6 @@ class User extends Authenticatable implements FilamentUser, HasMedia, HasAvatar
         'is_block' => 'boolean',
         'block_to' => 'datetime',
     ];
-
-    public function canAccessFilament(): bool
-    {
-        return $this->hasRole('admin');
-    }
 
     public function getFilamentAvatarUrl(): ?string
     {

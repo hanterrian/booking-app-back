@@ -3,7 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
-use App\Models\User;
+use App\Models\Admin\AdminUser;
 use Filament\Forms\Components\Card;
 use Livewire\Component;
 use Filament\Forms\Components\DatePicker;
@@ -26,11 +26,15 @@ use Masterminds\HTML5\Parser\FileInputStream;
 
 class UserResource extends Resource
 {
-    protected static ?string $model = User::class;
+    protected static ?string $model = AdminUser::class;
 
     protected static ?string $slug = 'users';
 
     protected static ?string $recordTitleAttribute = 'email';
+
+    protected static ?string $navigationGroup = 'User';
+
+    protected static ?string $navigationLabel = 'Users';
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
