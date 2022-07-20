@@ -88,6 +88,7 @@ class TagResource extends Resource
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime(),
             ])
+            ->defaultSort('created_at')
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
             ])

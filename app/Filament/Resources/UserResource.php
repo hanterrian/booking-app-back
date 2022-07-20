@@ -131,7 +131,8 @@ class UserResource extends Resource
                     ->sortable()
                     ->toggleable()
                     ->toggledHiddenByDefault(),
-            ]);
+            ])
+            ->defaultSort('created_at');
     }
 
     public static function getPages(): array
