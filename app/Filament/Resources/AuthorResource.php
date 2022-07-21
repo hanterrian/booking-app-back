@@ -49,7 +49,7 @@ class AuthorResource extends Resource
                                     ->maxLength(255),
 
                                 Forms\Components\TextInput::make('slug')
-                                    ->disabled(fn(Component $livewire): bool => $livewire instanceof Pages\CreateAuthor)
+                                    ->disabled(fn (Component $livewire): bool => $livewire instanceof Pages\CreateAuthor)
                                     ->maxLength(255),
                             ]),
                     ])

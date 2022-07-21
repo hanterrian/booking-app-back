@@ -48,7 +48,7 @@ class PublisherResource extends Resource
                                     ->maxLength(255),
 
                                 Forms\Components\TextInput::make('slug')
-                                    ->disabled(fn(Component $livewire): bool => $livewire instanceof Pages\CreatePublisher)
+                                    ->disabled(fn (Component $livewire): bool => $livewire instanceof Pages\CreatePublisher)
                                     ->maxLength(255),
                             ]),
                     ])

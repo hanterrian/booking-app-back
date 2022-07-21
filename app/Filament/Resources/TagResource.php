@@ -53,7 +53,7 @@ class TagResource extends Resource
                                     ->maxLength(255),
 
                                 Forms\Components\TextInput::make('slug')
-                                    ->disabled(fn(Component $livewire): bool => $livewire instanceof Pages\CreateTag)
+                                    ->disabled(fn (Component $livewire): bool => $livewire instanceof Pages\CreateTag)
                                     ->maxLength(255),
                             ]),
                     ])

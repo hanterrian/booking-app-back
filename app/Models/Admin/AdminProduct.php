@@ -27,11 +27,11 @@ use Spatie\Sluggable\SlugOptions;
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Author[] $authors
+ * @property-read \Illuminate\Database\Eloquent\Collection|Author[] $authors
  * @property-read int|null $authors_count
  * @property-read \App\Models\Category|null $category
  * @property-read \App\Models\Publisher|null $publisher
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Tag[] $tags
+ * @property-read \Illuminate\Database\Eloquent\Collection|Tag[] $tags
  * @property-read int|null $tags_count
  * @method static \Illuminate\Database\Eloquent\Builder|AdminProduct newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|AdminProduct newQuery()

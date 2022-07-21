@@ -48,7 +48,7 @@ class ProductResource extends Resource
                                     ->maxLength(255),
 
                                 Forms\Components\TextInput::make('slug')
-                                    ->disabled(fn(Component $livewire): bool => $livewire instanceof Pages\CreateProduct)
+                                    ->disabled(fn (Component $livewire): bool => $livewire instanceof Pages\CreateProduct)
                                     ->maxLength(255),
 
                                 Forms\Components\MarkdownEditor::make('description'),
@@ -70,7 +70,7 @@ class ProductResource extends Resource
 
                                 Forms\Components\TextInput::make('sku')
                                     ->label('SKU (Stock Keeping Unit)')
-                                    ->unique(Product::class, 'sku', fn($record) => $record)
+                                    ->unique(Product::class, 'sku', fn ($record) => $record)
                                     ->required(),
 
                                 Forms\Components\TextInput::make('stock')
