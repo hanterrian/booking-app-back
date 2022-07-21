@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Filament\Resources\CategoryResource\Pages;
+namespace App\Filament\Resources\ProductResource\Pages;
 
-use App\Filament\Resources\CategoryResource;
-use App\Models\Category;
+use App\Filament\Resources\ProductResource;
+use App\Models\Product;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Support\Str;
 
 /**
- * @property Category $record
+ * @property Product $record
  */
-class EditCategory extends EditRecord
+class EditProduct extends EditRecord
 {
-    protected static string $resource = CategoryResource::class;
+    protected static string $resource = ProductResource::class;
 
     public function beforeSave()
     {

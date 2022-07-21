@@ -19,4 +19,14 @@ trait Uuid
             $model->{$model->getKeyName()} = Str::uuid()->toString();
         });
     }
+
+    public function getKeyType(): string
+    {
+        return 'string';
+    }
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 }

@@ -30,4 +30,9 @@ class Profile extends Model
     protected $casts = [
         'user_uuid' => 'string',
     ];
+
+    public function getRouteKeyName(): string
+    {
+        return 'user_uuid';
+    }
 }

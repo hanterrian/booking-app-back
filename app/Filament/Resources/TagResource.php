@@ -34,9 +34,11 @@ class TagResource extends Resource
 
     protected static ?string $navigationGroup = 'Shop';
 
-    protected static ?string $navigationLabel = 'Tags';
+    protected static ?string $label = 'Tags';
 
     protected static ?string $navigationIcon = 'heroicon-o-tag';
+
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
@@ -51,7 +53,7 @@ class TagResource extends Resource
                                     ->maxLength(255),
 
                                 Forms\Components\TextInput::make('slug')
-                                    ->disabled()
+                                    ->disabled(fn(Component $livewire): bool => $livewire instanceof Pages\CreateTag)
                                     ->maxLength(255),
                             ]),
                     ])

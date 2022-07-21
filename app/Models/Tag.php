@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
@@ -35,6 +36,8 @@ use Spatie\Sluggable\SlugOptions;
  * @method static \Illuminate\Database\Query\Builder|Tag withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Tag withoutTrashed()
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Product[] $products
+ * @property-read int|null $products_count
  */
 class Tag extends Model
 {
@@ -42,8 +45,8 @@ class Tag extends Model
 
     protected $primaryKey = 'uuid';
 
-    public function getRouteKeyName(): string
+    public function products(): BelongsToMany
     {
-        return 'slug';
+        return $this->belongsToMany(Product::class);
     }
 }

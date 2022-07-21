@@ -3,8 +3,12 @@
 namespace App\Models;
 
 use App\Models\Traits\Uuid;
+use Eloquent;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Carbon;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
@@ -16,12 +20,12 @@ use Spatie\Sluggable\SlugOptions;
  * @property string $slug
  * @property int $sort
  * @property bool $published
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|Category newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Category newQuery()
- * @method static \Illuminate\Database\Query\Builder|Category onlyTrashed()
+ * @method static Builder|Category onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Category query()
  * @method static \Illuminate\Database\Eloquent\Builder|Category whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Category whereDeletedAt($value)
@@ -31,9 +35,11 @@ use Spatie\Sluggable\SlugOptions;
  * @method static \Illuminate\Database\Eloquent\Builder|Category whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Category whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Category whereUuid($value)
- * @method static \Illuminate\Database\Query\Builder|Category withTrashed()
- * @method static \Illuminate\Database\Query\Builder|Category withoutTrashed()
- * @mixin \Eloquent
+ * @method static Builder|Category withTrashed()
+ * @method static Builder|Category withoutTrashed()
+ * @mixin Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Product[] $products
+ * @property-read int|null $products_count
  */
 class Category extends Model
 {
@@ -41,8 +47,8 @@ class Category extends Model
 
     protected $primaryKey = 'uuid';
 
-    public function getRouteKeyName(): string
+    public function products(): HasMany
     {
-        return 'slug';
+        return $this->hasMany(Product::class);
     }
 }

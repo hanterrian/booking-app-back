@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Filament\Resources\CategoryResource\Pages;
+namespace App\Filament\Resources\AuthorResource\Pages;
 
-use App\Filament\Resources\CategoryResource;
-use App\Models\Category;
+use App\Filament\Resources\AuthorResource;
+use App\Models\Author;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Support\Str;
 
 /**
- * @property Category $record
+ * @property Author $record
  */
-class EditCategory extends EditRecord
+class EditAuthor extends EditRecord
 {
-    protected static string $resource = CategoryResource::class;
+    protected static string $resource = AuthorResource::class;
 
     public function beforeSave()
     {

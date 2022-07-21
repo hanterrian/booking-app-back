@@ -99,6 +99,11 @@ class User extends Authenticatable implements HasAvatar
         'block_to' => 'datetime',
     ];
 
+    public function getRouteKeyName(): string
+    {
+        return 'uuid';
+    }
+
     public function getFilamentAvatarUrl(): ?string
     {
         return Storage::disk('avatars')->url($this->avatar_src);

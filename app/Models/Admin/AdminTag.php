@@ -16,6 +16,24 @@ use Spatie\Sluggable\SlugOptions;
  * @method static \Illuminate\Database\Query\Builder|AdminTag withTrashed()
  * @method static \Illuminate\Database\Query\Builder|AdminTag withoutTrashed()
  * @mixin \Eloquent
+ * @property string $uuid
+ * @property string $title
+ * @property string $slug
+ * @property int $sort
+ * @property bool $published
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Product[] $products
+ * @property-read int|null $products_count
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminTag whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminTag whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminTag wherePublished($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminTag whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminTag whereSort($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminTag whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminTag whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminTag whereUuid($value)
  */
 class AdminTag extends Tag
 {

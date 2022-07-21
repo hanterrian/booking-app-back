@@ -13,6 +13,7 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Livewire\Component;
 
 class CategoryResource extends Resource
 {
@@ -24,9 +25,11 @@ class CategoryResource extends Resource
 
     protected static ?string $navigationGroup = 'Shop';
 
-    protected static ?string $navigationLabel = 'Category';
+    protected static ?string $label = 'Category';
 
     protected static ?string $navigationIcon = 'heroicon-o-view-list';
+
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {
@@ -41,7 +44,7 @@ class CategoryResource extends Resource
                                     ->maxLength(255),
 
                                 Forms\Components\TextInput::make('slug')
-                                    ->disabled()
+                                    ->disabled(fn(Component $livewire): bool => $livewire instanceof Pages\CreateCategory)
                                     ->maxLength(255),
                             ]),
                     ])
