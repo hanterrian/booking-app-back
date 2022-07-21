@@ -9,15 +9,6 @@ use Spatie\Sluggable\SlugOptions;
 /**
  * App\Models\Admin\AdminAuthor
  *
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Product[] $products
- * @property-read int|null $products_count
- * @method static \Illuminate\Database\Eloquent\Builder|AdminAuthor newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|AdminAuthor newQuery()
- * @method static \Illuminate\Database\Query\Builder|AdminAuthor onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|AdminAuthor query()
- * @method static \Illuminate\Database\Query\Builder|AdminAuthor withTrashed()
- * @method static \Illuminate\Database\Query\Builder|AdminAuthor withoutTrashed()
- * @mixin \Eloquent
  * @property string $uuid
  * @property string $name
  * @property string $slug
@@ -27,6 +18,12 @@ use Spatie\Sluggable\SlugOptions;
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Product[] $products
+ * @property-read int|null $products_count
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminAuthor newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminAuthor newQuery()
+ * @method static \Illuminate\Database\Query\Builder|AdminAuthor onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminAuthor query()
  * @method static \Illuminate\Database\Eloquent\Builder|AdminAuthor whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AdminAuthor whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AdminAuthor whereName($value)
@@ -36,6 +33,9 @@ use Spatie\Sluggable\SlugOptions;
  * @method static \Illuminate\Database\Eloquent\Builder|AdminAuthor whereSort($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AdminAuthor whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AdminAuthor whereUuid($value)
+ * @method static \Illuminate\Database\Query\Builder|AdminAuthor withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|AdminAuthor withoutTrashed()
+ * @mixin \Eloquent
  */
 class AdminAuthor extends Author
 {

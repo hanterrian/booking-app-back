@@ -38,7 +38,7 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
-    protected static ?int $navigationSort = 5;
+    protected static ?int $navigationSort = 6;
 
     public static function form(Form $form): Form
     {
@@ -61,8 +61,8 @@ class UserResource extends Resource
                                     ->password()
                                     ->required()
                                     ->maxLength(255)
-                                    ->dehydrateStateUsing(fn ($state) => Hash::make($state))
-                                    ->visible(fn (Component $livewire): bool => $livewire instanceof Pages\CreateUser),
+                                    ->dehydrateStateUsing(fn($state) => Hash::make($state))
+                                    ->visible(fn(Component $livewire): bool => $livewire instanceof Pages\CreateUser),
                             ]),
                     ])
                     ->columnSpan(2),
@@ -105,7 +105,7 @@ class UserResource extends Resource
                                     ])
                                     ->maxLength(255),
                             ])
-                            ->visible(fn (Component $livewire): bool => $livewire instanceof Pages\EditUser),
+                            ->visible(fn(Component $livewire): bool => $livewire instanceof Pages\EditUser),
                     ]),
             ])
             ->columns(3);

@@ -19,7 +19,6 @@ return new class extends Migration {
             $table->uuid()->primary();
 
             $table->foreignIdFor(Publisher::class)->nullable()->constrained('publishers', 'uuid')->nullOnDelete();
-            $table->foreignIdFor(Author::class)->nullable()->constrained('authors', 'uuid')->nullOnDelete();
             $table->foreignIdFor(Category::class)->nullable()->constrained('categories', 'uuid')->nullOnDelete();
 
             $table->string('title')->nullable(false);

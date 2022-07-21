@@ -3,13 +3,14 @@
 namespace App\Filament\Resources\TagResource\Pages;
 
 use App\Filament\Resources\TagResource;
+use App\Models\Admin\AdminTag;
 use App\Models\Tag;
 use Filament\Pages\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Support\Str;
 
 /**
- * @property Tag $record
+ * @property AdminTag $record
  */
 class EditTag extends EditRecord
 {

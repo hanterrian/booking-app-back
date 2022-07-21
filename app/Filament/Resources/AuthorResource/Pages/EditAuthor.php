@@ -3,13 +3,15 @@
 namespace App\Filament\Resources\AuthorResource\Pages;
 
 use App\Filament\Resources\AuthorResource;
+use App\Models\Admin\AdminAuthor;
+use App\Models\Admin\AdminPublisher;
 use App\Models\Author;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Support\Str;
 
 /**
- * @property Author $record
+ * @property AdminAuthor $record
  */
 class EditAuthor extends EditRecord
 {

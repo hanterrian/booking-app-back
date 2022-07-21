@@ -3,13 +3,14 @@
 namespace App\Filament\Resources\UserResource\Pages;
 
 use App\Filament\Resources\UserResource;
+use App\Models\Admin\AdminUser;
 use App\Models\User;
 use Filament\Pages\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Support\Facades\Hash;
 
 /**
- * @property User $record
+ * @property AdminUser $record
  */
 class EditUser extends EditRecord
 {

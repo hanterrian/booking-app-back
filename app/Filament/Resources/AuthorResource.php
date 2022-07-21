@@ -15,6 +15,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Livewire\Component;
@@ -33,7 +34,7 @@ class AuthorResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
     {
@@ -48,7 +49,7 @@ class AuthorResource extends Resource
                                     ->maxLength(255),
 
                                 Forms\Components\TextInput::make('slug')
-                                    ->disabled(fn (Component $livewire): bool => $livewire instanceof Pages\CreateAuthor)
+                                    ->disabled(fn(Component $livewire): bool => $livewire instanceof Pages\CreateAuthor)
                                     ->maxLength(255),
                             ]),
                     ])
@@ -56,12 +57,12 @@ class AuthorResource extends Resource
                 Group::make()
                     ->schema([
 
-                        Card::make()
+                        Forms\Components\Card::make()
                             ->schema([
                                 Placeholder::make('Photo'),
 
                                 FileUpload::make('photo_src')
-                                    ->disk('avatars')
+                                    ->disk('authors')
                                     ->image()
                                     ->avatar(),
                             ]),
@@ -87,18 +88,40 @@ class AuthorResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('uuid'),
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('slug'),
-                Tables\Columns\TextColumn::make('photo_src'),
-                Tables\Columns\TextColumn::make('sort'),
-                Tables\Columns\BooleanColumn::make('published'),
-                Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime(),
+                Tables\Columns\TextColumn::make('name')
+                    ->searchable()
+                    ->toggleable()
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('slug')
+                    ->toggleable()
+                    ->sortable(),
+
+                ImageColumn::make('photo_src')
+                    ->disk('authors')
+                    ->toggleable()
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('sort')
+                    ->toggleable()
+                    ->sortable(),
+
+                Tables\Columns\BooleanColumn::make('published')
+                    ->searchable()
+                    ->toggleable()
+                    ->sortable(),
+
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
+                    ->dateTime()
+                    ->toggleable()
+                    ->sortable()
+                    ->toggledHiddenByDefault(),
+
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
+                    ->dateTime()
+                    ->toggleable()
+                    ->sortable()
+                    ->toggledHiddenByDefault(),
             ])
             ->defaultSort('created_at')
             ->filters([

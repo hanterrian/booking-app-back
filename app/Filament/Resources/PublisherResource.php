@@ -2,35 +2,38 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CategoryResource\Pages;
-use App\Filament\Resources\CategoryResource\RelationManagers;
-use App\Models\Admin\AdminCategory;
+use App\Filament\Resources\PublisherResource\Pages;
+use App\Filament\Resources\PublisherResource\RelationManagers;
+use App\Models\Admin\AdminPublisher;
+use App\Models\Publisher;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Placeholder;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Livewire\Component;
 
-class CategoryResource extends Resource
+class PublisherResource extends Resource
 {
-    protected static ?string $model = AdminCategory::class;
+    protected static ?string $model = AdminPublisher::class;
 
-    protected static ?string $slug = 'categories';
+    protected static ?string $slug = 'publishers';
 
     protected static ?string $recordTitleAttribute = 'title';
 
     protected static ?string $navigationGroup = 'Shop';
 
-    protected static ?string $label = 'Category';
+    protected static ?string $label = 'Publisher';
 
-    protected static ?string $navigationIcon = 'heroicon-o-view-list';
+    protected static ?string $navigationIcon = 'heroicon-o-users';
 
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
     {
@@ -45,13 +48,23 @@ class CategoryResource extends Resource
                                     ->maxLength(255),
 
                                 Forms\Components\TextInput::make('slug')
-                                    ->disabled(fn(Component $livewire): bool => $livewire instanceof Pages\CreateCategory)
+                                    ->disabled(fn(Component $livewire): bool => $livewire instanceof Pages\CreatePublisher)
                                     ->maxLength(255),
                             ]),
                     ])
                     ->columnSpan(2),
                 Group::make()
                     ->schema([
+
+                        Forms\Components\Card::make()
+                            ->schema([
+                                Placeholder::make('Logo'),
+
+                                FileUpload::make('logo_src')
+                                    ->disk('publishers')
+                                    ->image(),
+                            ]),
+
                         Forms\Components\Card::make()
                             ->schema([
                                 Placeholder::make('Settings'),
@@ -82,6 +95,11 @@ class CategoryResource extends Resource
                     ->toggleable()
                     ->sortable(),
 
+                ImageColumn::make('logo_src')
+                    ->disk('publishers')
+                    ->toggleable()
+                    ->sortable(),
+
                 Tables\Columns\TextColumn::make('sort')
                     ->toggleable()
                     ->sortable(),
@@ -103,7 +121,6 @@ class CategoryResource extends Resource
                     ->sortable()
                     ->toggledHiddenByDefault(),
             ])
-            ->defaultSort('created_at')
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
             ])
@@ -127,9 +144,9 @@ class CategoryResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListCategories::route('/'),
-            'create' => Pages\CreateCategory::route('/create'),
-            'edit' => Pages\EditCategory::route('/{record}/edit'),
+            'index' => Pages\ListPublishers::route('/'),
+            'create' => Pages\CreatePublisher::route('/create'),
+            'edit' => Pages\EditPublisher::route('/{record}/edit'),
         ];
     }
 
@@ -139,10 +156,5 @@ class CategoryResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
-    }
-
-    public static function getGloballySearchableAttributes(): array
-    {
-        return ['title'];
     }
 }

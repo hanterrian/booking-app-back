@@ -19,10 +19,12 @@ use Spatie\Sluggable\SlugOptions;
  * @property string $title
  * @property string $slug
  * @property int $sort
- * @property bool $published
+ * @property int $published
  * @property Carbon|null $deleted_at
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Product[] $products
+ * @property-read int|null $products_count
  * @method static \Illuminate\Database\Eloquent\Builder|Category newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Category newQuery()
  * @method static Builder|Category onlyTrashed()
@@ -38,8 +40,6 @@ use Spatie\Sluggable\SlugOptions;
  * @method static Builder|Category withTrashed()
  * @method static Builder|Category withoutTrashed()
  * @mixin Eloquent
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Product[] $products
- * @property-read int|null $products_count
  */
 class Category extends Model
 {

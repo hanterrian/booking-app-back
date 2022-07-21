@@ -8,6 +8,17 @@ use Filament\Models\Contracts\FilamentUser;
 /**
  * App\Models\Admin\AdminUser
  *
+ * @property string $uuid
+ * @property string $name
+ * @property string $email
+ * @property \Illuminate\Support\Carbon|null $email_verified_at
+ * @property string $password
+ * @property string|null $remember_token
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property bool $is_block
+ * @property \Illuminate\Support\Carbon|null $block_to
+ * @property string|null $avatar_src
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Permission[] $permissions
@@ -21,18 +32,6 @@ use Filament\Models\Contracts\FilamentUser;
  * @method static \Illuminate\Database\Eloquent\Builder|User permission($permissions)
  * @method static \Illuminate\Database\Eloquent\Builder|AdminUser query()
  * @method static \Illuminate\Database\Eloquent\Builder|User role($roles, $guard = null)
- * @mixin \Eloquent
- * @property string $uuid
- * @property string $name
- * @property string $email
- * @property \Illuminate\Support\Carbon|null $email_verified_at
- * @property string $password
- * @property string|null $remember_token
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property bool $is_block
- * @property \Illuminate\Support\Carbon|null $block_to
- * @property string|null $avatar_src
  * @method static \Illuminate\Database\Eloquent\Builder|AdminUser whereAvatarSrc($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AdminUser whereBlockTo($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AdminUser whereCreatedAt($value)
@@ -44,6 +43,7 @@ use Filament\Models\Contracts\FilamentUser;
  * @method static \Illuminate\Database\Eloquent\Builder|AdminUser whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AdminUser whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AdminUser whereUuid($value)
+ * @mixin \Eloquent
  */
 class AdminUser extends User implements FilamentUser
 {

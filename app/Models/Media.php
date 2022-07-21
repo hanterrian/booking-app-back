@@ -7,7 +7,7 @@ use App\Models\Traits\Uuid;
 /**
  * App\Models\Media
  *
- * @property int $uuid
+ * @property string $uuid
  * @property string $model_type
  * @property string $model_id
  * @property string $collection_name

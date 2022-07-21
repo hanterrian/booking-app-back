@@ -12,18 +12,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * App\Models\Product
  *
- * @property-read \App\Models\Category|null $category
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Tag[] $tags
- * @property-read int|null $tags_count
- * @method static \Illuminate\Database\Eloquent\Builder|Product newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Product newQuery()
- * @method static \Illuminate\Database\Query\Builder|Product onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|Product query()
- * @method static \Illuminate\Database\Query\Builder|Product withTrashed()
- * @method static \Illuminate\Database\Query\Builder|Product withoutTrashed()
- * @mixin \Eloquent
  * @property string $uuid
- * @property string|null $author_uuid
+ * @property string|null $publisher_uuid
  * @property string|null $category_uuid
  * @property string $title
  * @property string $slug
@@ -37,13 +27,23 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereAuthorUuid($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Author[] $authors
+ * @property-read int|null $authors_count
+ * @property-read \App\Models\Category|null $category
+ * @property-read \App\Models\Publisher|null $publisher
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Tag[] $tags
+ * @property-read int|null $tags_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Product newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Product newQuery()
+ * @method static \Illuminate\Database\Query\Builder|Product onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Product query()
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereCategoryUuid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Product wherePrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Product wherePublished($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product wherePublisherUuid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereSku($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereSort($value)
@@ -52,10 +52,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereUuid($value)
- * @property string|null $publisher_uuid
- * @property-read \App\Models\Author|null $author
- * @property-read \App\Models\Publisher|null $publisher
- * @method static \Illuminate\Database\Eloquent\Builder|Product wherePublisherUuid($value)
+ * @method static \Illuminate\Database\Query\Builder|Product withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Product withoutTrashed()
+ * @mixin \Eloquent
  */
 class Product extends Model
 {
@@ -68,9 +67,9 @@ class Product extends Model
         return $this->belongsTo(Publisher::class);
     }
 
-    public function author(): BelongsTo
+    public function authors(): BelongsToMany
     {
-        return $this->belongsTo(Author::class);
+        return $this->belongsToMany(Author::class);
     }
 
     public function category(): BelongsTo

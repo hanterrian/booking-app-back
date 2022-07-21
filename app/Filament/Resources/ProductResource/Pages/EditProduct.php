@@ -3,13 +3,14 @@
 namespace App\Filament\Resources\ProductResource\Pages;
 
 use App\Filament\Resources\ProductResource;
+use App\Models\Admin\AdminProduct;
 use App\Models\Product;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Support\Str;
 
 /**
- * @property Product $record
+ * @property AdminProduct $record
  */
 class EditProduct extends EditRecord
 {

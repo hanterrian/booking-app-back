@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Filament\Resources\CategoryResource\Pages;
+namespace App\Filament\Resources\PublisherResource\Pages;
 
-use App\Filament\Resources\CategoryResource;
-use App\Models\Admin\AdminCategory;
-use App\Models\Category;
+use App\Filament\Resources\PublisherResource;
+use App\Models\Admin\AdminPublisher;
+use App\Models\Publisher;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Support\Str;
 
 /**
- * @property AdminCategory $record
+ * @property AdminPublisher $record
  */
-class EditCategory extends EditRecord
+class EditPublisher extends EditRecord
 {
-    protected static string $resource = CategoryResource::class;
+    protected static string $resource = PublisherResource::class;
 
     public function beforeSave()
     {

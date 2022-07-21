@@ -9,13 +9,6 @@ use Spatie\Sluggable\SlugOptions;
 /**
  * App\Models\Admin\AdminCategory
  *
- * @method static \Illuminate\Database\Eloquent\Builder|AdminCategory newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|AdminCategory newQuery()
- * @method static \Illuminate\Database\Query\Builder|AdminCategory onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|AdminCategory query()
- * @method static \Illuminate\Database\Query\Builder|AdminCategory withTrashed()
- * @method static \Illuminate\Database\Query\Builder|AdminCategory withoutTrashed()
- * @mixin \Eloquent
  * @property string $uuid
  * @property string $title
  * @property string $slug
@@ -26,6 +19,10 @@ use Spatie\Sluggable\SlugOptions;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Product[] $products
  * @property-read int|null $products_count
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminCategory newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminCategory newQuery()
+ * @method static \Illuminate\Database\Query\Builder|AdminCategory onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminCategory query()
  * @method static \Illuminate\Database\Eloquent\Builder|AdminCategory whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AdminCategory whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AdminCategory wherePublished($value)
@@ -34,6 +31,9 @@ use Spatie\Sluggable\SlugOptions;
  * @method static \Illuminate\Database\Eloquent\Builder|AdminCategory whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AdminCategory whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AdminCategory whereUuid($value)
+ * @method static \Illuminate\Database\Query\Builder|AdminCategory withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|AdminCategory withoutTrashed()
+ * @mixin \Eloquent
  */
 class AdminCategory extends Category
 {

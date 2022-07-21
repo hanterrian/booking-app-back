@@ -53,7 +53,7 @@ class TagResource extends Resource
                                     ->maxLength(255),
 
                                 Forms\Components\TextInput::make('slug')
-                                    ->disabled(fn (Component $livewire): bool => $livewire instanceof Pages\CreateTag)
+                                    ->disabled(fn(Component $livewire): bool => $livewire instanceof Pages\CreateTag)
                                     ->maxLength(255),
                             ]),
                     ])
@@ -81,16 +81,35 @@ class TagResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('title'),
-                Tables\Columns\TextColumn::make('slug'),
-                Tables\Columns\TextColumn::make('sort'),
-                Tables\Columns\BooleanColumn::make('published'),
-                Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime(),
+                Tables\Columns\TextColumn::make('title')
+                    ->searchable()
+                    ->toggleable()
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('slug')
+                    ->toggleable()
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('sort')
+                    ->toggleable()
+                    ->sortable(),
+
+                Tables\Columns\BooleanColumn::make('published')
+                    ->searchable()
+                    ->toggleable()
+                    ->sortable(),
+
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
+                    ->dateTime()
+                    ->toggleable()
+                    ->sortable()
+                    ->toggledHiddenByDefault(),
+
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
+                    ->dateTime()
+                    ->toggleable()
+                    ->sortable()
+                    ->toggledHiddenByDefault(),
             ])
             ->defaultSort('created_at')
             ->filters([

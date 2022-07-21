@@ -2,25 +2,18 @@
 
 namespace App\Models\Admin;
 
+use App\Models\Author;
 use App\Models\Product;
+use App\Models\Tag;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
 /**
  * App\Models\Admin\AdminProduct
  *
- * @property-read \App\Models\Category|null $category
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Tag[] $tags
- * @property-read int|null $tags_count
- * @method static \Illuminate\Database\Eloquent\Builder|AdminProduct newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|AdminProduct newQuery()
- * @method static \Illuminate\Database\Query\Builder|AdminProduct onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|AdminProduct query()
- * @method static \Illuminate\Database\Query\Builder|AdminProduct withTrashed()
- * @method static \Illuminate\Database\Query\Builder|AdminProduct withoutTrashed()
- * @mixin \Eloquent
  * @property string $uuid
- * @property string|null $author_uuid
+ * @property string|null $publisher_uuid
  * @property string|null $category_uuid
  * @property string $title
  * @property string $slug
@@ -34,13 +27,23 @@ use Spatie\Sluggable\SlugOptions;
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|AdminProduct whereAuthorUuid($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Author[] $authors
+ * @property-read int|null $authors_count
+ * @property-read \App\Models\Category|null $category
+ * @property-read \App\Models\Publisher|null $publisher
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Tag[] $tags
+ * @property-read int|null $tags_count
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminProduct newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminProduct newQuery()
+ * @method static \Illuminate\Database\Query\Builder|AdminProduct onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminProduct query()
  * @method static \Illuminate\Database\Eloquent\Builder|AdminProduct whereCategoryUuid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AdminProduct whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AdminProduct whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AdminProduct whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AdminProduct wherePrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AdminProduct wherePublished($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminProduct wherePublisherUuid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AdminProduct whereSku($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AdminProduct whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AdminProduct whereSort($value)
@@ -49,10 +52,9 @@ use Spatie\Sluggable\SlugOptions;
  * @method static \Illuminate\Database\Eloquent\Builder|AdminProduct whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AdminProduct whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AdminProduct whereUuid($value)
- * @property string|null $publisher_uuid
- * @property-read \App\Models\Author|null $author
- * @property-read \App\Models\Publisher|null $publisher
- * @method static \Illuminate\Database\Eloquent\Builder|AdminProduct wherePublisherUuid($value)
+ * @method static \Illuminate\Database\Query\Builder|AdminProduct withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|AdminProduct withoutTrashed()
+ * @mixin \Eloquent
  */
 class AdminProduct extends Product
 {
@@ -66,6 +68,8 @@ class AdminProduct extends Product
         'title',
         'slug',
         'sku',
+        'publisher_uuid',
+        'category_uuid',
         'description',
         'stock',
         'thumbnail_src',
@@ -76,8 +80,9 @@ class AdminProduct extends Product
 
     protected $casts = [
         'uuid' => 'string',
+        'publisher_uuid' => 'string',
+        'category_uuid' => 'string',
         'stock' => 'integer',
-        'price' => 'decimal',
         'sort' => 'integer',
         'published' => 'boolean',
     ];
@@ -92,5 +97,15 @@ class AdminProduct extends Product
     public function getRouteKeyName(): string
     {
         return 'uuid';
+    }
+
+    public function authors(): BelongsToMany
+    {
+        return $this->belongsToMany(Author::class, 'author_product', 'product_uuid', 'author_uuid');
+    }
+
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class, 'tag_product', 'product_uuid', 'tag_uuid');
     }
 }
