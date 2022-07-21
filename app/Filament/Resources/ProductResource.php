@@ -154,6 +154,7 @@ class ProductResource extends Resource
                     ->sortable(),
 
                 ImageColumn::make('thumbnail_src')
+                    ->label('Thumbnail')
                     ->disk('products')
                     ->toggleable(),
 
