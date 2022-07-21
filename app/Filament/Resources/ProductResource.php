@@ -164,7 +164,8 @@ class ProductResource extends Resource
 
                 Tables\Columns\TextColumn::make('slug')
                     ->toggleable()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggledHiddenByDefault(),
 
                 Tables\Columns\TextColumn::make('sort')
                     ->toggleable()
