@@ -48,6 +48,7 @@ use Filament\Models\Contracts\FilamentUser;
 class AdminUser extends User implements FilamentUser
 {
     public ?string $new_password = null;
+
     public ?string $new_password_confirmation = null;
 
     protected $primaryKey = 'uuid';

@@ -7,6 +7,7 @@ use App\Filament\Resources\CategoryResource\RelationManagers;
 use App\Models\Admin\AdminCategory;
 use Filament\Forms;
 use Filament\Forms\Components\Group;
+use Filament\Forms\Components\Placeholder;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -44,7 +45,7 @@ class CategoryResource extends Resource
                                     ->maxLength(255),
 
                                 Forms\Components\TextInput::make('slug')
-                                    ->disabled(fn(Component $livewire): bool => $livewire instanceof Pages\CreateCategory)
+                                    ->disabled(fn (Component $livewire): bool => $livewire instanceof Pages\CreateCategory)
                                     ->maxLength(255),
                             ]),
                     ])
@@ -53,6 +54,8 @@ class CategoryResource extends Resource
                     ->schema([
                         Forms\Components\Card::make()
                             ->schema([
+                                Placeholder::make('Settings'),
+
                                 Forms\Components\TextInput::make('sort')
                                     ->required()
                                     ->default(0),

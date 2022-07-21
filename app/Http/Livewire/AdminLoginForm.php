@@ -9,7 +9,11 @@ use Livewire\Component;
 
 class AdminLoginForm extends Component
 {
-    public $user, $email, $password;
+    public $user;
+
+    public $email;
+
+    public $password;
 
     public function render()
     {

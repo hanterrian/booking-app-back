@@ -2,7 +2,7 @@
 
 function format_bool(mixed $value): string
 {
-    if (!!$value) {
+    if ((bool) $value) {
         return 'Yes';
     } else {
         return 'No';

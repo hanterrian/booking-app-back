@@ -5,7 +5,6 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\UserResource\Pages;
 use App\Models\Admin\AdminUser;
 use Filament\Forms\Components\Card;
-use Livewire\Component;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
@@ -22,6 +21,7 @@ use Filament\Tables\Columns\BooleanColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Support\Facades\Hash;
+use Livewire\Component;
 use Masterminds\HTML5\Parser\FileInputStream;
 
 class UserResource extends Resource
@@ -61,8 +61,8 @@ class UserResource extends Resource
                                     ->password()
                                     ->required()
                                     ->maxLength(255)
-                                    ->dehydrateStateUsing(fn($state) => Hash::make($state))
-                                    ->visible(fn(Component $livewire): bool => $livewire instanceof Pages\CreateUser),
+                                    ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                                    ->visible(fn (Component $livewire): bool => $livewire instanceof Pages\CreateUser),
                             ]),
                     ])
                     ->columnSpan(2),
@@ -79,6 +79,8 @@ class UserResource extends Resource
 
                         Card::make()
                             ->schema([
+                                Placeholder::make('Avatar'),
+
                                 FileUpload::make('avatar_src')
                                     ->disk('avatars')
                                     ->image()
@@ -103,7 +105,7 @@ class UserResource extends Resource
                                     ])
                                     ->maxLength(255),
                             ])
-                            ->visible(fn(Component $livewire): bool => $livewire instanceof Pages\EditUser),
+                            ->visible(fn (Component $livewire): bool => $livewire instanceof Pages\EditUser),
                     ]),
             ])
             ->columns(3);

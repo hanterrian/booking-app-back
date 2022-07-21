@@ -37,6 +37,8 @@ class ProductResource extends Resource
                 Forms\Components\TextInput::make('uuid')
                     ->required()
                     ->maxLength(36),
+                Forms\Components\TextInput::make('publisher_uuid')
+                    ->maxLength(36),
                 Forms\Components\TextInput::make('author_uuid')
                     ->maxLength(36),
                 Forms\Components\TextInput::make('category_uuid')

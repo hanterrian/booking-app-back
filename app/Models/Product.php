@@ -52,12 +52,26 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereUuid($value)
+ * @property string|null $publisher_uuid
+ * @property-read \App\Models\Author|null $author
+ * @property-read \App\Models\Publisher|null $publisher
+ * @method static \Illuminate\Database\Eloquent\Builder|Product wherePublisherUuid($value)
  */
 class Product extends Model
 {
     use Uuid, SoftDeletes;
 
     protected $primaryKey = 'uuid';
+
+    public function publisher(): BelongsTo
+    {
+        return $this->belongsTo(Publisher::class);
+    }
+
+    public function author(): BelongsTo
+    {
+        return $this->belongsTo(Author::class);
+    }
 
     public function category(): BelongsTo
     {

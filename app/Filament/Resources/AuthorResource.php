@@ -7,12 +7,17 @@ use App\Filament\Resources\AuthorResource\RelationManagers;
 use App\Models\Admin\AdminAuthor;
 use App\Models\Author;
 use Filament\Forms;
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Group;
+use Filament\Forms\Components\Placeholder;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Livewire\Component;
 
 class AuthorResource extends Resource
 {
@@ -34,22 +39,48 @@ class AuthorResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('uuid')
-                    ->required()
-                    ->maxLength(36),
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('slug')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('photo_src')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('sort')
-                    ->required(),
-                Forms\Components\Toggle::make('published')
-                    ->required(),
-            ]);
+                Group::make()
+                    ->schema([
+                        Forms\Components\Card::make()
+                            ->schema([
+                                Forms\Components\TextInput::make('name')
+                                    ->required()
+                                    ->maxLength(255),
+
+                                Forms\Components\TextInput::make('slug')
+                                    ->disabled(fn (Component $livewire): bool => $livewire instanceof Pages\CreateAuthor)
+                                    ->maxLength(255),
+                            ]),
+                    ])
+                    ->columnSpan(2),
+                Group::make()
+                    ->schema([
+
+                        Card::make()
+                            ->schema([
+                                Placeholder::make('Photo'),
+
+                                FileUpload::make('photo_src')
+                                    ->disk('avatars')
+                                    ->image()
+                                    ->avatar(),
+                            ]),
+
+                        Forms\Components\Card::make()
+                            ->schema([
+                                Placeholder::make('Settings'),
+
+                                Forms\Components\TextInput::make('sort')
+                                    ->required()
+                                    ->default(0),
+
+                                Forms\Components\Toggle::make('published')
+                                    ->default(true)
+                                    ->required(),
+                            ]),
+                    ]),
+            ])
+            ->columns(3);
     }
 
     public static function table(Table $table): Table

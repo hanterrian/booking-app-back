@@ -20,7 +20,7 @@ class AuthController extends Controller
     {
         $check = $this->userAuthService->check($request);
 
-        if (!$check) {
+        if (! $check) {
             throw ValidationException::withMessages([
                 'email' => [
                     'The provided credentials are incorrect.',

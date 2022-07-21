@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -16,6 +17,11 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run()
+    {
+        $this->createUsers();
+    }
+
+    private function createUsers()
     {
         $adminRole = Role::create(['name' => 'admin']);
         $userRole = Role::create(['name' => 'user']);

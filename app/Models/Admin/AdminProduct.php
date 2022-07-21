@@ -49,6 +49,10 @@ use Spatie\Sluggable\SlugOptions;
  * @method static \Illuminate\Database\Eloquent\Builder|AdminProduct whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AdminProduct whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AdminProduct whereUuid($value)
+ * @property string|null $publisher_uuid
+ * @property-read \App\Models\Author|null $author
+ * @property-read \App\Models\Publisher|null $publisher
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminProduct wherePublisherUuid($value)
  */
 class AdminProduct extends Product
 {

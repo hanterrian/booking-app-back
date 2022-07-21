@@ -53,7 +53,7 @@ class TagResource extends Resource
                                     ->maxLength(255),
 
                                 Forms\Components\TextInput::make('slug')
-                                    ->disabled(fn(Component $livewire): bool => $livewire instanceof Pages\CreateTag)
+                                    ->disabled(fn (Component $livewire): bool => $livewire instanceof Pages\CreateTag)
                                     ->maxLength(255),
                             ]),
                     ])
@@ -62,6 +62,8 @@ class TagResource extends Resource
                     ->schema([
                         Forms\Components\Card::make()
                             ->schema([
+                                Placeholder::make('Settings'),
+
                                 Forms\Components\TextInput::make('sort')
                                     ->required()
                                     ->default(0),
