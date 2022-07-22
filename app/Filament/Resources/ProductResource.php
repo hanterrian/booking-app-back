@@ -192,6 +192,10 @@ class ProductResource extends Resource
             ->defaultSort('created_at')
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
+                Tables\Filters\SelectFilter::make('publisher')->relationship('publisher', 'title'),
+                Tables\Filters\SelectFilter::make('authors')->relationship('authors', 'name'),
+                Tables\Filters\SelectFilter::make('category')->relationship('category', 'title'),
+                Tables\Filters\SelectFilter::make('tags')->relationship('tags', 'title'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

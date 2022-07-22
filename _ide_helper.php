@@ -18465,6 +18465,43 @@
      
 }
 
+    namespace App\Http\Requests\Api\v1\Auth { 
+            /**
+     * 
+     *
+     * @property string $email
+     * @property string $password
+     */ 
+        class LoginFormRequest {
+         
+    }
+            /**
+     * 
+     *
+     * @property string $name
+     * @property string $email
+     * @property string $avatar
+     * @property string $birthday
+     * @property string $password
+     * @property string $password_confirmation
+     */ 
+        class RegisterFormRequest {
+         
+    }
+     
+}
+
+    namespace Illuminate\Foundation\Http { 
+            /**
+     * 
+     *
+     */ 
+        class FormRequest {
+         
+    }
+     
+}
+
     namespace Illuminate\Routing { 
             /**
      * 
