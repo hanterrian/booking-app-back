@@ -55,6 +55,13 @@ use Spatie\Sluggable\SlugOptions;
  * @method static \Illuminate\Database\Query\Builder|AdminProduct withTrashed()
  * @method static \Illuminate\Database\Query\Builder|AdminProduct withoutTrashed()
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|Product filter(array $input = [], $filter = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product paginateFilter($perPage = null, $columns = [], $pageName = 'page', $page = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product simplePaginateFilter($perPage = null, $columns = [], $pageName = 'page', $page = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereBeginsWith($column, $value, $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereEndsWith($column, $value, $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereLike($column, $value, $boolean = 'and')
+ * @property-read mixed $thumbnail
  */
 class AdminProduct extends Product
 {

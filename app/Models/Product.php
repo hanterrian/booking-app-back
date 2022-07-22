@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use App\ModelFilters\ProductFilter;
 use App\Models\Traits\Uuid;
+use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * App\Models\Product
@@ -55,12 +58,29 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|Product withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Product withoutTrashed()
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|Product filter(array $input = [], $filter = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product paginateFilter($perPage = null, $columns = [], $pageName = 'page', $page = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product simplePaginateFilter($perPage = null, $columns = [], $pageName = 'page', $page = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereBeginsWith($column, $value, $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereEndsWith($column, $value, $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereLike($column, $value, $boolean = 'and')
+ * @property-read mixed $thumbnail
  */
 class Product extends Model
 {
-    use Uuid, SoftDeletes;
+    use Uuid, SoftDeletes, Filterable;
 
     protected $primaryKey = 'uuid';
+
+    public function modelFilter(): ?string
+    {
+        return $this->provideFilter(ProductFilter::class);
+    }
+
+    public function getThumbnailAttribute()
+    {
+        return $this->thumbnail_src ? Storage::disk('products')->url($this->thumbnail_src) : '/img/no-image.png';
+    }
 
     public function publisher(): BelongsTo
     {
@@ -69,7 +89,7 @@ class Product extends Model
 
     public function authors(): BelongsToMany
     {
-        return $this->belongsToMany(Author::class);
+        return $this->belongsToMany(Author::class, 'author_product');
     }
 
     public function category(): BelongsTo
@@ -77,8 +97,8 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function tags(): BelongsToMany
+    public function tags()
     {
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Tag::class, 'tag_product');
     }
 }

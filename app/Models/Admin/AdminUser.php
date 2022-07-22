@@ -44,6 +44,7 @@ use Filament\Models\Contracts\FilamentUser;
  * @method static \Illuminate\Database\Eloquent\Builder|AdminUser whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AdminUser whereUuid($value)
  * @mixin \Eloquent
+ * @property-read mixed $avatar
  */
 class AdminUser extends User implements FilamentUser
 {

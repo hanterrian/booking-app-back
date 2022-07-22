@@ -56,6 +56,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUuid($value)
  * @mixin \Eloquent
+ * @property-read mixed $avatar
  */
 class User extends Authenticatable implements HasAvatar
 {
@@ -106,6 +107,11 @@ class User extends Authenticatable implements HasAvatar
 
     public function getFilamentAvatarUrl(): ?string
     {
-        return Storage::disk('avatars')->url($this->avatar_src);
+        return $this->avatar;
+    }
+
+    public function getAvatarAttribute()
+    {
+        return $this->avatar_src ? Storage::disk('avatars')->url($this->avatar_src) : '/img/avatar.jpg';
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Front\MainController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [MainController::class, 'index'])->name('home');
+
+Route::get('/author/{author}', [MainController::class, 'index'])->name('author.index');
+Route::get('/publisher/{publisher}', [MainController::class, 'index'])->name('publisher.index');
+Route::get('/category/{category}', [MainController::class, 'index'])->name('category.index');
+Route::get('/tag/{tag}', [MainController::class, 'index'])->name('tag.index');
