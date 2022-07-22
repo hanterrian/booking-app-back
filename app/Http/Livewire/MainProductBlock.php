@@ -13,11 +13,16 @@ class MainProductBlock extends Component
 {
     private readonly FrontProductService $frontProductService;
 
+    public ?int $author = null;
+    public ?int $publisher = null;
+    public ?int $category = null;
+    public ?int $tag = null;
+
     protected $rules = [
-        'author' => ['nullable', 'max:255'],
-        'publisher' => ['nullable', 'max:255'],
-        'category' => ['nullable', 'max:255'],
-        'tag' => ['nullable', 'max:255'],
+        'author' => ['nullable', 'numeric'],
+        'publisher' => ['nullable', 'numeric'],
+        'category' => ['nullable', 'numeric'],
+        'tag' => ['nullable', 'numeric'],
     ];
 
     /**
