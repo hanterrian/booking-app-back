@@ -30,17 +30,24 @@ use Spatie\Sluggable\SlugOptions;
  * @property-read \Illuminate\Database\Eloquent\Collection|Author[] $authors
  * @property-read int|null $authors_count
  * @property-read \App\Models\Category|null $category
+ * @property-read mixed $thumbnail
  * @property-read \App\Models\Publisher|null $publisher
  * @property-read \Illuminate\Database\Eloquent\Collection|Tag[] $tags
  * @property-read int|null $tags_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Product filter(array $input = [], $filter = null)
  * @method static \Illuminate\Database\Eloquent\Builder|AdminProduct newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|AdminProduct newQuery()
  * @method static \Illuminate\Database\Query\Builder|AdminProduct onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Product paginateFilter($perPage = null, $columns = [], $pageName = 'page', $page = null)
  * @method static \Illuminate\Database\Eloquent\Builder|AdminProduct query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Product simplePaginateFilter($perPage = null, $columns = [], $pageName = 'page', $page = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereBeginsWith($column, $value, $boolean = 'and')
  * @method static \Illuminate\Database\Eloquent\Builder|AdminProduct whereCategoryUuid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AdminProduct whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AdminProduct whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AdminProduct whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereEndsWith($column, $value, $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereLike($column, $value, $boolean = 'and')
  * @method static \Illuminate\Database\Eloquent\Builder|AdminProduct wherePrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AdminProduct wherePublished($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AdminProduct wherePublisherUuid($value)
@@ -55,13 +62,6 @@ use Spatie\Sluggable\SlugOptions;
  * @method static \Illuminate\Database\Query\Builder|AdminProduct withTrashed()
  * @method static \Illuminate\Database\Query\Builder|AdminProduct withoutTrashed()
  * @mixin \Eloquent
- * @method static \Illuminate\Database\Eloquent\Builder|Product filter(array $input = [], $filter = null)
- * @method static \Illuminate\Database\Eloquent\Builder|Product paginateFilter($perPage = null, $columns = [], $pageName = 'page', $page = null)
- * @method static \Illuminate\Database\Eloquent\Builder|Product simplePaginateFilter($perPage = null, $columns = [], $pageName = 'page', $page = null)
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereBeginsWith($column, $value, $boolean = 'and')
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereEndsWith($column, $value, $boolean = 'and')
- * @method static \Illuminate\Database\Eloquent\Builder|Product whereLike($column, $value, $boolean = 'and')
- * @property-read mixed $thumbnail
  */
 class AdminProduct extends Product
 {

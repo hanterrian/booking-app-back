@@ -25,6 +25,8 @@ use Spatie\Sluggable\SlugOptions;
  * @property Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Product[] $products
  * @property-read int|null $products_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Tag[] $tags
+ * @property-read int|null $tags_count
  * @method static \Illuminate\Database\Eloquent\Builder|Category newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Category newQuery()
  * @method static Builder|Category onlyTrashed()
@@ -46,6 +48,11 @@ class Category extends Model
     use Uuid, SoftDeletes;
 
     protected $primaryKey = 'uuid';
+
+    public function tags(): HasMany
+    {
+        return $this->hasMany(Tag::class);
+    }
 
     public function products(): HasMany
     {

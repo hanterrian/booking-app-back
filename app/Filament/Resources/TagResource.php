@@ -62,6 +62,13 @@ class TagResource extends Resource
                     ->schema([
                         Forms\Components\Card::make()
                             ->schema([
+                                Forms\Components\Select::make('category')
+                                    ->relationship('category', 'title')
+                                    ->required(),
+                            ]),
+
+                        Forms\Components\Card::make()
+                            ->schema([
                                 Placeholder::make('Settings'),
 
                                 Forms\Components\TextInput::make('sort')
@@ -81,6 +88,11 @@ class TagResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('category.title')
+                    ->searchable()
+                    ->toggleable()
+                    ->sortable(),
+
                 Tables\Columns\TextColumn::make('title')
                     ->searchable()
                     ->toggleable()
@@ -114,6 +126,7 @@ class TagResource extends Resource
             ->defaultSort('created_at')
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
+                Tables\Filters\SelectFilter::make('category')->relationship('category', 'title'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

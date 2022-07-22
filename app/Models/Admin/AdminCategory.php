@@ -19,6 +19,8 @@ use Spatie\Sluggable\SlugOptions;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Product[] $products
  * @property-read int|null $products_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Tag[] $tags
+ * @property-read int|null $tags_count
  * @method static \Illuminate\Database\Eloquent\Builder|AdminCategory newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|AdminCategory newQuery()
  * @method static \Illuminate\Database\Query\Builder|AdminCategory onlyTrashed()

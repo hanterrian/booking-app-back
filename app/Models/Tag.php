@@ -14,6 +14,7 @@ use Spatie\Sluggable\SlugOptions;
  * App\Models\Tag
  *
  * @property string $uuid
+ * @property string|null $category_uuid
  * @property string $title
  * @property string $slug
  * @property int $sort
@@ -21,12 +22,14 @@ use Spatie\Sluggable\SlugOptions;
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Category|null $category
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Product[] $products
  * @property-read int|null $products_count
  * @method static \Illuminate\Database\Eloquent\Builder|Tag newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Tag newQuery()
  * @method static \Illuminate\Database\Query\Builder|Tag onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Tag query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Tag whereCategoryUuid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Tag whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Tag whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Tag wherePublished($value)
@@ -44,6 +47,11 @@ class Tag extends Model
     use Uuid, SoftDeletes;
 
     protected $primaryKey = 'uuid';
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 
     public function products(): BelongsToMany
     {

@@ -19,6 +19,7 @@ use Filament\Models\Contracts\FilamentUser;
  * @property bool $is_block
  * @property \Illuminate\Support\Carbon|null $block_to
  * @property string|null $avatar_src
+ * @property-read mixed $avatar
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Permission[] $permissions
@@ -44,7 +45,6 @@ use Filament\Models\Contracts\FilamentUser;
  * @method static \Illuminate\Database\Eloquent\Builder|AdminUser whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AdminUser whereUuid($value)
  * @mixin \Eloquent
- * @property-read mixed $avatar
  */
 class AdminUser extends User implements FilamentUser
 {

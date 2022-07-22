@@ -10,6 +10,7 @@ use Spatie\Sluggable\SlugOptions;
  * App\Models\Admin\AdminTag
  *
  * @property string $uuid
+ * @property string|null $category_uuid
  * @property string $title
  * @property string $slug
  * @property int $sort
@@ -17,12 +18,14 @@ use Spatie\Sluggable\SlugOptions;
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Category|null $category
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Product[] $products
  * @property-read int|null $products_count
  * @method static \Illuminate\Database\Eloquent\Builder|AdminTag newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|AdminTag newQuery()
  * @method static \Illuminate\Database\Query\Builder|AdminTag onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|AdminTag query()
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminTag whereCategoryUuid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AdminTag whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AdminTag whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AdminTag wherePublished($value)

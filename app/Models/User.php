@@ -30,6 +30,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property bool $is_block
  * @property \Illuminate\Support\Carbon|null $block_to
  * @property string|null $avatar_src
+ * @property-read mixed $avatar
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Permission[] $permissions
@@ -56,7 +57,6 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUuid($value)
  * @mixin \Eloquent
- * @property-read mixed $avatar
  */
 class User extends Authenticatable implements HasAvatar
 {
