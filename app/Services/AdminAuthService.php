@@ -5,18 +5,18 @@ namespace App\Services;
 use App\Http\Requests\Api\v1\Auth\LoginFormRequest;
 use App\Http\Requests\Api\v1\Auth\RegisterFormRequest;
 use App\Models\User;
-use App\Repositories\UserRepository;
+use App\Repositories\AdminRepository;
 use Illuminate\Support\Facades\Hash;
 
-class UserAuthService
+class AdminAuthService
 {
-    public function __construct(private UserRepository $userRepository)
+    public function __construct(private readonly AdminRepository $adminRepository)
     {
     }
 
     public function check(LoginFormRequest $request): false|User
     {
-        $user = $this->userRepository->find($request->email);
+        $user = $this->adminRepository->find($request->email);
 
         if ($user && Hash::check($request->password, $user->password)) {
             return $user;
@@ -27,6 +27,6 @@ class UserAuthService
 
     public function register(RegisterFormRequest $request): User
     {
-        return $this->userRepository->register($request);
+        return $this->adminRepository->register($request);
     }
 }

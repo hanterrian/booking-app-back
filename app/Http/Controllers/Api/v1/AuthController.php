@@ -6,21 +6,21 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\Auth\LoginFormRequest;
 use App\Http\Requests\Api\v1\Auth\RegisterFormRequest;
 use App\Http\Resources\AuthRegisterUserResource;
-use App\Services\UserAuthService;
+use App\Services\AdminAuthService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-    public function __construct(private UserAuthService $userAuthService)
+    public function __construct(private readonly AdminAuthService $adminAuthService)
     {
     }
 
     public function login(LoginFormRequest $request): string
     {
-        $check = $this->userAuthService->check($request);
+        $check = $this->adminAuthService->check($request);
 
-        if (! $check) {
+        if (!$check) {
             throw ValidationException::withMessages([
                 'email' => [
                     'The provided credentials are incorrect.',
@@ -33,7 +33,7 @@ class AuthController extends Controller
 
     public function register(RegisterFormRequest $request): AuthRegisterUserResource
     {
-        $user = $this->userAuthService->register($request);
+        $user = $this->adminAuthService->register($request);
 
         return new AuthRegisterUserResource($user);
     }
