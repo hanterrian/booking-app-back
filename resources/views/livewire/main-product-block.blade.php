@@ -2,33 +2,31 @@
     <div class="grid grid-cols-3 gap-4">
         @foreach($items as $item)
             <div>
-                <img src="{{ $item->thumbnail }}"/>
+                <img src="{{ $item->thumbnail }}" alt="{{ $item->title }}"/>
                 <div>
                     <h2>{{ $item->title }}</h2>
                 </div>
                 <div>
-                    <div>{{ __('Authors') }}</div>
-                    <ul>
+                    <div>
+                        {{ __('Authors') }}:
                         @foreach($item->authors as $author)
-                            <li>
-                                <a href="{{ route('author.index', ['author' => $author]) }}">{{ $author->name }}</a>
-                            </li>
+                            {{ $loop->first ? '' : "," }}
+                            <a class="underline" href="{{ route('author.index', ['author' => $author]) }}">{{ $author->name }}</a>
                         @endforeach
-                    </ul>
+                    </div>
                 </div>
                 <div>
-                    <div>{{ __('Publisher') }} <a href="{{ route('publisher.index', ['publisher' => $item->publisher]) }}">{{ $item->publisher->title }}</a></div>
-                    <div>{{ __('Category') }} <a href="{{ route('category.index', ['category' => $item->category]) }}">{{ $item->category->title }}</a></div>
+                    <div>{{ __('Publisher') }}: <a class="underline" href="{{ route('publisher.index', ['publisher' => $item->publisher]) }}">{{ $item->publisher->title }}</a></div>
+                    <div>{{ __('Category') }}: <a class="underline" href="{{ route('category.index', ['category' => $item->category]) }}">{{ $item->category->title }}</a></div>
                 </div>
                 <div>
-                    <div>{{ __('Tags') }}</div>
-                    <ul>
+                    <div>
+                        {{ __('Tags') }}:
                         @foreach($item->tags as $tag)
-                            <li>
-                                <a href="{{ route('tag.index', ['tag' => $tag]) }}">{{ $tag->title }}</a>
-                            </li>
+                            {{ $loop->first ? '' : "," }}
+                            <a class="underline" href="{{ route('tag.index', ['tag' => $tag]) }}">{{ $tag->title }}</a>
                         @endforeach
-                    </ul>
+                    </div>
                 </div>
             </div>
         @endforeach
