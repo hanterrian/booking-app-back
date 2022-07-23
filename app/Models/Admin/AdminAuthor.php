@@ -3,6 +3,7 @@
 namespace App\Models\Admin;
 
 use App\Models\Author;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
@@ -58,6 +59,11 @@ class AdminAuthor extends Author
         'sort' => 'integer',
         'published' => 'boolean',
     ];
+
+    public function deletePhoto(): void
+    {
+        Storage::disk('authors')->delete($this->photo_src);
+    }
 
     public function getSlugOptions(): SlugOptions
     {

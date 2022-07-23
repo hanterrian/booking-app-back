@@ -21,6 +21,11 @@ class EditProduct extends EditRecord
         $this->record->slug = Str::slug($this->data['slug'] ?? '');
     }
 
+    public function beforeDelete()
+    {
+        $this->record->deleteThumbnail();
+    }
+
     protected function getActions(): array
     {
         return [

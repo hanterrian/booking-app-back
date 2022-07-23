@@ -22,6 +22,11 @@ class EditAuthor extends EditRecord
         $this->record->slug = Str::slug($this->data['slug'] ?? '');
     }
 
+    public function beforeDelete()
+    {
+        $this->record->deletePhoto();
+    }
+
     protected function getActions(): array
     {
         return [

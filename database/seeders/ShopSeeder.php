@@ -2,8 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Admin\AdminAuthor;
 use App\Models\Admin\AdminCategory;
+use App\Models\Admin\AdminPublisher;
 use App\Models\Admin\AdminTag;
+use App\Models\Author;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
@@ -102,5 +105,28 @@ class ShopSeeder extends Seeder
                 ]);
             }
         }
+
+        for ($i = 0; $i < 10; $i++) {
+            AdminPublisher::create([
+                'title' => fake()->name,
+                'sort' => $i,
+                'published' => true,
+            ]);
+        }
+
+        for ($i = 0; $i < 10; $i++) {
+            AdminAuthor::create([
+                'name' => fake()->name,
+                'sort' => $i,
+                'published' => true,
+            ]);
+        }
+
+        $this->generateProduct();
+    }
+
+    private function generateProduct()
+    {
+
     }
 }

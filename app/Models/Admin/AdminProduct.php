@@ -6,6 +6,7 @@ use App\Models\Author;
 use App\Models\Product;
 use App\Models\Tag;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
@@ -93,6 +94,11 @@ class AdminProduct extends Product
         'sort' => 'integer',
         'published' => 'boolean',
     ];
+
+    public function deleteThumbnail(): void
+    {
+        Storage::disk('products')->delete($this->thumbnail_src);
+    }
 
     public function getSlugOptions(): SlugOptions
     {
