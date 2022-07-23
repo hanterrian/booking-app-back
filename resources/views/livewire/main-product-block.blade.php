@@ -1,5 +1,29 @@
 <div>
     <div class="p-10">
+        <select wire:model="category" wire:change.prevent="filter">
+            <option value="">{{ __('All') }}</option>
+            @foreach($categories as $key => $category)
+                <option value="{{ $key }}">{{ $category }}</option>
+            @endforeach
+        </select>
+        <select wire:model="tag" wire:change.prevent="filter">
+            <option value="">{{ __('All') }}</option>
+            @foreach($tags as $key => $tag)
+                <option value="{{ $key }}">{{ $tag }}</option>
+            @endforeach
+        </select>
+        <select wire:model="publisher" wire:change.prevent="filter">
+            <option value="">{{ __('All') }}</option>
+            @foreach($publishers as $key => $publisher)
+                <option value="{{ $key }}">{{ $publisher }}</option>
+            @endforeach
+        </select>
+        <select wire:model="author" wire:change.prevent="filter">
+            <option value="">{{ __('All') }}</option>
+            @foreach($authors as $key => $author)
+                <option value="{{ $key }}">{{ $author }}</option>
+            @endforeach
+        </select>
     </div>
     <div class="px-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
         @foreach($items as $item)

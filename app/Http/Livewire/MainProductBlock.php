@@ -2,6 +2,10 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Author;
+use App\Models\Category;
+use App\Models\Publisher;
+use App\Models\Tag;
 use App\Services\FrontProductService;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Foundation\Application;
@@ -13,16 +17,16 @@ class MainProductBlock extends Component
 {
     private readonly FrontProductService $frontProductService;
 
-    public ?int $author = null;
-    public ?int $publisher = null;
-    public ?int $category = null;
-    public ?int $tag = null;
+    public ?string $author = null;
+    public ?string $publisher = null;
+    public ?string $category = null;
+    public ?string $tag = null;
 
     protected $rules = [
-        'author' => ['nullable', 'numeric'],
-        'publisher' => ['nullable', 'numeric'],
-        'category' => ['nullable', 'numeric'],
-        'tag' => ['nullable', 'numeric'],
+        'author' => ['nullable', 'string'],
+        'publisher' => ['nullable', 'string'],
+        'category' => ['nullable', 'string'],
+        'tag' => ['nullable', 'string'],
     ];
 
     /**
@@ -42,8 +46,19 @@ class MainProductBlock extends Component
 
     public function render(): Factory|View|Application
     {
+        $categories = Category::wherePublished(true)->orderBy('sort')->pluck('title', 'slug');
+        $publishers = Publisher::wherePublished(true)->orderBy('sort')->pluck('title', 'slug');
+        $authors = Author::wherePublished(true)->orderBy('sort')->pluck('name', 'slug');
+        $tags = Tag::wherePublished(true)->orderBy('sort')->pluck('title', 'slug');
+
         $items = $this->frontProductService->getFrontList($this->all());
 
-        return view('livewire.main-product-block', ['items' => $items]);
+        return view('livewire.main-product-block', [
+            'categories' => $categories,
+            'publishers' => $publishers,
+            'authors' => $authors,
+            'tags' => $tags,
+            'items' => $items,
+        ]);
     }
 }
