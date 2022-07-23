@@ -59,9 +59,8 @@ class AuthorResource extends Resource
 
                         Forms\Components\Card::make()
                             ->schema([
-                                Placeholder::make('Photo'),
-
                                 FileUpload::make('photo_src')
+                                    ->label('Photo')
                                     ->disk('authors')
                                     ->image()
                                     ->avatar(),
@@ -98,6 +97,7 @@ class AuthorResource extends Resource
                     ->sortable(),
 
                 ImageColumn::make('photo_src')
+                    ->label('Photo')
                     ->disk('authors')
                     ->toggleable()
                     ->sortable(),

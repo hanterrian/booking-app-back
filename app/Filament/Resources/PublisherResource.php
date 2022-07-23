@@ -58,9 +58,8 @@ class PublisherResource extends Resource
 
                         Forms\Components\Card::make()
                             ->schema([
-                                Placeholder::make('Logo'),
-
                                 FileUpload::make('logo_src')
+                                    ->label('Logo')
                                     ->disk('publishers')
                                     ->image(),
                             ]),
@@ -96,6 +95,7 @@ class PublisherResource extends Resource
                     ->sortable(),
 
                 ImageColumn::make('logo_src')
+                    ->label('Logo')
                     ->disk('publishers')
                     ->toggleable()
                     ->sortable(),

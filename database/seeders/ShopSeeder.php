@@ -4,9 +4,14 @@ namespace Database\Seeders;
 
 use App\Models\Admin\AdminAuthor;
 use App\Models\Admin\AdminCategory;
+use App\Models\Admin\AdminProduct;
 use App\Models\Admin\AdminPublisher;
 use App\Models\Admin\AdminTag;
 use App\Models\Author;
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\Publisher;
+use App\Models\Tag;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
@@ -108,7 +113,7 @@ class ShopSeeder extends Seeder
 
         for ($i = 0; $i < 10; $i++) {
             AdminPublisher::create([
-                'title' => fake()->name,
+                'title' => fake()->text(15),
                 'sort' => $i,
                 'published' => true,
             ]);
@@ -127,6 +132,35 @@ class ShopSeeder extends Seeder
 
     private function generateProduct()
     {
+        for ($i = 0; $i < 150; $i++) {
+            /** @var Publisher $publisher */
+            $publisher = Publisher::inRandomOrder()->first();
+            /** @var Author[] $authors */
+            $authors = Author::inRandomOrder()->limit(rand(1, 3))->get();
+            /** @var Category $category */
+            $category = Category::inRandomOrder()->first();
+            /** @var Tag[] $tags */
+            $tags = $category->tags()->limit(rand(1, 3))->get();
 
+            $product = new AdminProduct();
+
+            $product->title = fake()->text(20);
+
+            $product->sku = "SKU-".str_pad($i, 8, '0', STR_PAD_LEFT);
+
+            $product->description = fake()->realTextBetween(200, 300);
+
+            $product->stock = rand(10, 150);
+
+            $product->price = rand(150, 300);
+
+            $product->publisher()->associate($publisher);
+            $product->category()->associate($category);
+
+            $product->save();
+
+            $product->authors()->attach($authors);
+            $product->tags()->attach($tags);
+        }
     }
 }
