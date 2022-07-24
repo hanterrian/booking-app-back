@@ -86,4 +86,7 @@
             </div>
         @endforeach
     </div>
+    <div class="p-10 flex flex-row">
+        {{ $items->links() }}
+    </div>
 </div>
