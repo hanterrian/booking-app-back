@@ -18,4 +18,32 @@ class ProductFilter extends ModelFilter
         'category' => ['title'],
         'tags' => ['title'],
     ];
+
+    public function author()
+    {
+        $this->whereHas('authors', function ($q) {
+            $q->where('slug', '=', $this->input('author'));
+        });
+    }
+
+    public function publisher()
+    {
+        $this->whereHas('publisher', function ($q) {
+            $q->where('slug', '=', $this->input('publisher'));
+        });
+    }
+
+    public function category()
+    {
+        $this->whereHas('category', function ($q) {
+            $q->where('slug', '=', $this->input('category'));
+        });
+    }
+
+    public function tag()
+    {
+        $this->whereHas('tags', function ($q) {
+            $q->where('slug', '=', $this->input('tag'));
+        });
+    }
 }

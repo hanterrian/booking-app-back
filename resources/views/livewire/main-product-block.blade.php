@@ -1,31 +1,53 @@
 <div>
-    <div class="p-10">
-        <select wire:model="category" wire:change.prevent="filter">
-            <option value="">{{ __('All') }}</option>
-            @foreach($categories as $key => $category)
-                <option value="{{ $key }}">{{ $category }}</option>
-            @endforeach
-        </select>
-        <select wire:model="tag" wire:change.prevent="filter">
-            <option value="">{{ __('All') }}</option>
-            @foreach($tags as $key => $tag)
-                <option value="{{ $key }}">{{ $tag }}</option>
-            @endforeach
-        </select>
-        <select wire:model="publisher" wire:change.prevent="filter">
-            <option value="">{{ __('All') }}</option>
-            @foreach($publishers as $key => $publisher)
-                <option value="{{ $key }}">{{ $publisher }}</option>
-            @endforeach
-        </select>
-        <select wire:model="author" wire:change.prevent="filter">
-            <option value="">{{ __('All') }}</option>
-            @foreach($authors as $key => $author)
-                <option value="{{ $key }}">{{ $author }}</option>
-            @endforeach
-        </select>
+    <div class="p-10 flex flex-row">
+        <div class="self-start pr-4">
+            <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">{{ __('Category') }}</label>
+            <select id="category" wire:model="category" wire:change.prevent="filter"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option value="">{{ __('All') }}</option>
+                @foreach($categories as $key => $category)
+                    <option value="{{ $key }}">{{ $category }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="self-start pr-4">
+            <label for="tag" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">{{ __('Tag') }}</label>
+            <select id="tag" wire:model="tag" wire:change.prevent="filter"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option value="">{{ __('All') }}</option>
+                @foreach($tags as $key => $tag)
+                    <option value="{{ $key }}">{{ $tag }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="self-start pr-4">
+            <label for="publisher" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">{{ __('Publisher') }}</label>
+            <select id="publisher" wire:model="publisher" wire:change.prevent="filter"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option value="">{{ __('All') }}</option>
+                @foreach($publishers as $key => $publisher)
+                    <option value="{{ $key }}">{{ $publisher }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="self-start pr-4">
+            <label for="author" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">{{ __('Author') }}</label>
+            <select id="author" wire:model="author" wire:change.prevent="filter"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option value="">{{ __('All') }}</option>
+                @foreach($authors as $key => $author)
+                    <option value="{{ $key }}">{{ $author }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="self-end">
+            @if($filtered)
+                <button wire:click.prefetch="resetFilter" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2.5 px-4 rounded inline-flex items-center">{{ __('Reset filter') }}</button>
+            @endif
+        </div>
     </div>
-    <div class="px-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
+
+    <div class="px-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5" wire:loading.remove>
         @foreach($items as $item)
             <div class="flex flex-col rounded overflow-hidden shadow-lg">
                 <img class="w-full" src="{{ $item->thumbnail }}" alt="{{ $item->title }}"/>

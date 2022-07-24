@@ -22,6 +22,8 @@ class MainProductBlock extends Component
     public ?string $category = null;
     public ?string $tag = null;
 
+    public bool $filtered = false;
+
     protected $rules = [
         'author' => ['nullable', 'string'],
         'publisher' => ['nullable', 'string'],
@@ -41,7 +43,14 @@ class MainProductBlock extends Component
 
     public function filter()
     {
+        $this->filtered = true;
+    }
 
+    public function resetFilter()
+    {
+        $this->reset(['author', 'publisher', 'category', 'tag']);
+
+        $this->filtered = false;
     }
 
     public function render(): Factory|View|Application
@@ -58,6 +67,7 @@ class MainProductBlock extends Component
             'publishers' => $publishers,
             'authors' => $authors,
             'tags' => $tags,
+            'filtered' => $this->filtered,
             'items' => $items,
         ]);
     }
