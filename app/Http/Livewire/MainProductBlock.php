@@ -21,6 +21,7 @@ class MainProductBlock extends Component
     public ?string $publisher = null;
     public ?string $category = null;
     public ?string $tag = null;
+    public ?string $search = null;
 
     public bool $filtered = false;
 
@@ -29,7 +30,10 @@ class MainProductBlock extends Component
         'publisher' => ['nullable', 'string'],
         'category' => ['nullable', 'string'],
         'tag' => ['nullable', 'string'],
+        'search' => ['nullable', 'string'],
     ];
+
+    protected $queryString = ['author', 'publisher', 'category', 'tag', 'search'];
 
     /**
      * @throws BindingResolutionException
@@ -48,7 +52,7 @@ class MainProductBlock extends Component
 
     public function resetFilter()
     {
-        $this->reset(['author', 'publisher', 'category', 'tag']);
+        $this->reset(['author', 'publisher', 'category', 'tag', 'search']);
 
         $this->filtered = false;
     }

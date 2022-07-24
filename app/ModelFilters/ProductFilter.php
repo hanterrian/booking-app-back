@@ -46,4 +46,9 @@ class ProductFilter extends ModelFilter
             $q->where('slug', '=', $this->input('tag'));
         });
     }
+
+    public function search()
+    {
+        $this->where('title', 'like', "%".$this->input('search')."%");
+    }
 }
