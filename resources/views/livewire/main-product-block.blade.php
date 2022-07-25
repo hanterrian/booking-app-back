@@ -49,7 +49,7 @@
                     <svg aria-hidden="true" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                     </svg>
-                    <span class="sr-only">Search</span>
+                    <span class="sr-only">{{ __('Search') }}</span>
                 </button>
             </div>
         </div>
@@ -61,7 +61,7 @@
     </div>
 
     <div class="p-4 px-10 w-full mb-4 text-sm text-blue-700 bg-blue-100 rounded-lg dark:bg-blue-200 dark:text-blue-800" role="alert" wire:loading>
-        <span class="font-medium">Searching</span> It'll take some time
+        <span class="font-medium">{{ __('Searching') }}</span> {{ __('It\'ll take some time') }}
     </div>
 
     <div class="px-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5" wire:loading.remove>
@@ -97,7 +97,7 @@
                         @endforeach
                     </div>
                 </div>
-                <a class="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center" href="{{ route('book.view', ['book' => $item]) }}">
+                <a class="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center" href="{{ route('product.view', ['product' => $item]) }}">
                     {{ __('Read more') }}
                 </a>
             </div>
