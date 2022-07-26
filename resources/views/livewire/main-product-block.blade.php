@@ -73,25 +73,25 @@
                     <div class="pt-4 pb-2">
                         {{ __('Authors') }}:
                         @foreach($item->authors as $author)
-                            <a class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2" href="{{ route('author.index', ['author' => $author]) }}">
+                            <a class="book-babel" href="{{ route('author.index', ['author' => $author]) }}">
                                 {{ $author->name }}
                             </a>
                         @endforeach
                     </div>
                     <div class="pt-2 pb-2">
-                        {{ __('Publisher') }}: <a class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2" href="{{ route('publisher.index', ['publisher' => $item->publisher]) }}">
+                        {{ __('Publisher') }}: <a class="book-babel" href="{{ route('publisher.index', ['publisher' => $item->publisher]) }}">
                             {{ $item->publisher->title }}
                         </a>
                     </div>
                     <div class="pt-2 pb-2">
-                        {{ __('Category') }}: <a class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2" href="{{ route('category.index', ['category' => $item->category]) }}">
+                        {{ __('Category') }}: <a class="book-babel" href="{{ route('category.index', ['category' => $item->category]) }}">
                             {{ $item->category->title }}
                         </a>
                     </div>
                     <div class="pt-2 pb-2">
                         {{ __('Tags') }}:
                         @foreach($item->tags as $tag)
-                            <a class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2" href="{{ route('tag.index', ['tag' => $tag]) }}">
+                            <a class="book-babel" href="{{ route('tag.index', ['tag' => $tag]) }}">
                                 {{ $tag->title }}
                             </a>
                         @endforeach
