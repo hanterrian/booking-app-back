@@ -1,61 +1,44 @@
-<div>
-    <div class="p-10 flex flex-row">
-        <div class="self-start pr-4">
-            <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">{{ __('Category') }}</label>
-            <select id="category" wire:model="category" wire:change.prevent="filter"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+<div class="col-12">
+    <div class="row mb-4">
+        <div class="col-auto">
+            <label for="category" class="form-label">{{ __('Category') }}</label>
+            <select id="category" wire:model="category" wire:change.prevent="filter" class="form-select">
                 <option value="">{{ __('All') }}</option>
                 @foreach($categories as $key => $category)
                     <option value="{{ $key }}">{{ $category }}</option>
                 @endforeach
             </select>
         </div>
-        <div class="self-start pr-4">
-            <label for="tag" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">{{ __('Tag') }}</label>
-            <select id="tag" wire:model="tag" wire:change.prevent="filter"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        <div class="col-auto">
+            <label for="tag" class="form-label">{{ __('Tag') }}</label>
+            <select id="tag" wire:model="tag" wire:change.prevent="filter" class="form-select">
                 <option value="">{{ __('All') }}</option>
                 @foreach($tags as $key => $tag)
                     <option value="{{ $key }}">{{ $tag }}</option>
                 @endforeach
             </select>
         </div>
-        <div class="self-start pr-4">
-            <label for="publisher" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">{{ __('Publisher') }}</label>
-            <select id="publisher" wire:model="publisher" wire:change.prevent="filter"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        <div class="col-auto">
+            <label for="publisher" class="form-label">{{ __('Publisher') }}</label>
+            <select id="publisher" wire:model="publisher" wire:change.prevent="filter" class="form-select">
                 <option value="">{{ __('All') }}</option>
                 @foreach($publishers as $key => $publisher)
                     <option value="{{ $key }}">{{ $publisher }}</option>
                 @endforeach
             </select>
         </div>
-        <div class="self-start pr-4">
-            <label for="author" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">{{ __('Author') }}</label>
-            <select id="author" wire:model="author" wire:change.prevent="filter"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        <div class="col-auto">
+            <label for="author" class="form-label">{{ __('Author') }}</label>
+            <select id="author" wire:model="author" wire:change.prevent="filter" class="form-select">
                 <option value="">{{ __('All') }}</option>
                 @foreach($authors as $key => $author)
                     <option value="{{ $key }}">{{ $author }}</option>
                 @endforeach
             </select>
         </div>
-        <div class="self-start pr-4">
-            <div class="relative w-full mt-7">
-                <input type="text" wire:model="search" placeholder="{{ __('Search') }}"
-                       class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 rounded-l-lg border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"/>
-                <button wire:click.prevent="filter"
-                        class="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    <svg aria-hidden="true" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                    </svg>
-                    <span class="sr-only">{{ __('Search') }}</span>
-                </button>
-            </div>
-        </div>
-        <div class="self-end">
+        <div class="col-auto">
             @if($filtered)
-                <button wire:click.prefetch="resetFilter" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2.5 px-4 rounded inline-flex items-center">{{ __('Reset filter') }}</button>
+                <button wire:click.prefetch="resetFilter" class="btn btn-outline-light">{{ __('Reset filter') }}</button>
             @endif
         </div>
     </div>
