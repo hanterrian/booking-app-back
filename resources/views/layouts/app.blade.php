@@ -26,7 +26,7 @@
 <body>
 
 <div class="container-fluid">
-    <x-main-header/>
+    <x-nav-header/>
 
     @yield('content')
 </div>

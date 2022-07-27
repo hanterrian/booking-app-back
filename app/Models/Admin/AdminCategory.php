@@ -36,6 +36,7 @@ use Spatie\Sluggable\SlugOptions;
  * @method static \Illuminate\Database\Query\Builder|AdminCategory withTrashed()
  * @method static \Illuminate\Database\Query\Builder|AdminCategory withoutTrashed()
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|Category list()
  */
 class AdminCategory extends Category
 {

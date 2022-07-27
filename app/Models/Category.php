@@ -7,7 +7,7 @@ use Eloquent;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
@@ -42,12 +42,27 @@ use Spatie\Sluggable\SlugOptions;
  * @method static Builder|Category withTrashed()
  * @method static Builder|Category withoutTrashed()
  * @mixin Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|Category list()
  */
 class Category extends Model
 {
     use Uuid, SoftDeletes;
 
     protected $primaryKey = 'uuid';
+
+    /**
+     * @param  Builder  $query
+     * @return Builder
+     */
+    public function scopeList(Builder $query): Builder
+    {
+        return $query
+            ->with('tags', fn ($query) => $query->where(['published' => true])->orderBy('sort'))
+            ->where([
+                'published' => true,
+            ])
+            ->orderBy('sort');
+    }
 
     public function tags(): HasMany
     {
