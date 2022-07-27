@@ -29,6 +29,9 @@
     <x-nav-header/>
 
     @yield('content')
+
+    <livewire:popup.login-popup-form/>
+    <livewire:popup.register-popup-form/>
 </div>
 
 </body>

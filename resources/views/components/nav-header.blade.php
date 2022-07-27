@@ -7,7 +7,6 @@
             </li>
         </ul>
         <livewire:navbar-search/>
-        <livewire:nav-login-form/>
-        <livewire:nav-register-form/>
+        <livewire:nav-login-button/>
     </div>
 </nav>
