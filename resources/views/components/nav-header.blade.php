@@ -1,15 +1,13 @@
 <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{ route('home') }}">{{ __('Booking') }}</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ route('home') }}">{{ __('Home') }}</a>
-                </li>
-            </ul>
-        </div>
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            <li>
+                <a class="nav-link px-2" aria-current="page" href="{{ route('home') }}">{{ __('Home') }}</a>
+            </li>
+        </ul>
+        <livewire:navbar-search/>
+        <livewire:nav-login-form/>
+        <livewire:nav-register-form/>
     </div>
 </nav>
