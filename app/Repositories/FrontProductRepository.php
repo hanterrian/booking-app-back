@@ -13,6 +13,6 @@ class FrontProductRepository
      */
     public function getFrontList(array $input = []): LengthAwarePaginator
     {
-        return Product::filter($input)->paginate();
+        return Product::filter($input)->paginate(20);
     }
 }
