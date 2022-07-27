@@ -1,4 +1,4 @@
-<div class="col-12">
+<div class="col-12 mt-4">
     <div class="row mb-4 form-floating">
         <div class="col-auto">
             <label for="category">{{ __('Category') }}</label>
@@ -38,7 +38,7 @@
         </div>
         <div class="col-auto">
             @if($filtered)
-                <button wire:click.prefetch="resetFilter" class="btn btn-outline-light">{{ __('Reset filter') }}</button>
+                <button wire:click.prefetch="resetFilter" class="btn btn-outline-info mt-4">{{ __('Reset filter') }}</button>
             @endif
         </div>
     </div>
@@ -89,7 +89,7 @@
             </div>
         @endforeach
     </div>
-    <div class="p-10 flex flex-row" wire:loading.remove>
+    <div class="row mt-3" wire:loading.remove>
         {{ $items->links() }}
     </div>
 </div>

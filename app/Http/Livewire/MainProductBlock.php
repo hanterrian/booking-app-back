@@ -59,6 +59,15 @@ class MainProductBlock extends Component
 
     public function render(): Factory|View|Application
     {
+        if (
+            $this->author != null ||
+            $this->publisher != null ||
+            $this->category != null ||
+            $this->tag != null
+        ) {
+            $this->filtered = true;
+        }
+
         $categories = Category::wherePublished(true)->orderBy('sort')->pluck('title', 'slug');
         $publishers = Publisher::wherePublished(true)->orderBy('sort')->pluck('title', 'slug');
         $authors = Author::wherePublished(true)->orderBy('sort')->pluck('name', 'slug');
