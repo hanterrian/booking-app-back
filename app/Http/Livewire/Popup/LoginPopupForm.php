@@ -13,9 +13,15 @@ class LoginPopupForm extends Component
     public ?string $password = null;
     public bool $rememberMe = false;
 
+    protected $rules = [
+        'email' => ['required', 'email', 'max:255'],
+        'password' => ['required', 'min:6', 'max:255'],
+        'rememberMe' => ['bool'],
+    ];
+
     public function login(): void
     {
-
+        $this->validate();
     }
 
     public function render(): Factory|View|Application
