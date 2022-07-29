@@ -22,7 +22,7 @@ class LoginPopupForm extends Component
         'rememberMe' => ['bool'],
     ];
 
-    public function login()
+    public function login(): void
     {
         $this->validate();
 
@@ -36,7 +36,7 @@ class LoginPopupForm extends Component
         if ($user && Hash::check($this->password, $user->password)) {
             Auth::login($user, $this->rememberMe);
 
-            return redirect()->route('home');
+            redirect()->route('home');
         } else {
             $this->addError('email', __('Incorrect credentials'));
         }

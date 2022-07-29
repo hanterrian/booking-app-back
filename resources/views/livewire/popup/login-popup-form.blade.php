@@ -6,20 +6,20 @@
     <div class="modal-body">
         <div class="mb-3">
             <label for="email" class="form-label">{{ __('Email') }}</label>
-            <input id="email" class="form-control @error('password')is-invalid @enderror" type="email" wire:model.lazy="email"/>
+            <input id="email" class="form-control @error('password')is-invalid @enderror" type="email" wire:model="email"/>
             @error('email')
             <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">{{ __('Password') }}</label>
-            <input id="password" class="form-control @error('password')is-invalid @enderror" type="password" wire:model.lazy="password"/>
+            <input id="password" class="form-control @error('password')is-invalid @enderror" type="password" wire:model="password"/>
             @error('password')
             <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
         <div class="mb-3 form-check">
-            <input id="remember" class="form-check-input" type="checkbox" wire:model.lazy="rememberMe">
+            <input id="remember" class="form-check-input" type="checkbox" wire:model="rememberMe">
             <label for="remember" class="form-check-label">
                 {{ __('Remember me') }}
             </label>

@@ -25,22 +25,24 @@
 
 <body>
 
-<div class="container-fluid">
+<div class="container">
     <x-nav-header/>
 
     @yield('content')
 
-    <div class="modal fade" id="loginPopup" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <livewire:popup.login-popup-form/>
+    @guest
+        <div class="modal fade" id="loginPopup" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <livewire:popup.login-popup-form/>
+            </div>
         </div>
-    </div>
 
-    <div class="modal fade" id="registerPopup" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <livewire:popup.register-popup-form/>
+        <div class="modal fade" id="registerPopup" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <livewire:popup.register-popup-form/>
+            </div>
         </div>
-    </div>
+    @endguest
 
 </div>
 

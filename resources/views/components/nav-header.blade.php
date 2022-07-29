@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg bg-light">
-    <div class="container-fluid">
+    <div class="container">
         <a class="navbar-brand" href="{{ route('home') }}">{{ __('Booking') }}</a>
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
             <li>
@@ -8,7 +8,7 @@
         </ul>
 
         @auth
-
+            <x-nav-profile/>
         @endauth
 
         @guest
