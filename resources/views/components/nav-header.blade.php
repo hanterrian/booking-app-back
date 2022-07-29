@@ -6,7 +6,14 @@
                 <a class="nav-link px-2" aria-current="page" href="{{ route('home') }}">{{ __('Home') }}</a>
             </li>
         </ul>
-        <livewire:navbar-search/>
-        <livewire:nav-login-button/>
+
+        @auth
+
+        @endauth
+
+        @guest
+            <livewire:navbar-search/>
+            <livewire:nav-login-button/>
+        @endguest
     </div>
 </nav>
