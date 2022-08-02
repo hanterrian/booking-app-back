@@ -3,14 +3,12 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
-use Artesaos\SEOTools\Facades\SEOTools;
+use Inertia\Inertia;
 
 class MainController extends Controller
 {
     public function index()
     {
-        SEOTools::setTitle(__('Home'));
-
-        return view('main.index');
+        return Inertia::render('Main');
     }
 }
