@@ -1,5 +1,5 @@
 <script setup>
-import {Head, Link} from '@inertiajs/inertia-vue3'
+import { Head, Link } from '@inertiajs/inertia-vue3'
 import MainLayout from '@/Layouts/Main.vue'
 </script>
 
