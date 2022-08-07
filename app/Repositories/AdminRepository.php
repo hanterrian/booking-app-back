@@ -9,7 +9,7 @@ class AdminRepository
 {
     public function find(string $email): ?User
     {
-        return User::first(['email' => $email]);
+        return User::whereEmail($email)->first();
     }
 
     public function register(RegisterFormRequest $request): User

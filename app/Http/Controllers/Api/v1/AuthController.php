@@ -23,7 +23,7 @@ class AuthController extends Controller
         return new UserViewResource($this->adminAuthService->getUser());
     }
 
-    public function login(LoginFormRequest $request): string
+    public function login(LoginFormRequest $request): array
     {
         $check = $this->adminAuthService->check($request);
 
@@ -35,7 +35,11 @@ class AuthController extends Controller
             ]);
         }
 
-        return $check->createToken($check->email.'.token')->plainTextToken;
+        $token = $check->createToken($check->email.'.token')->plainTextToken;
+
+        return [
+            'token' => $token,
+        ];
     }
 
     public function register(RegisterFormRequest $request): AuthRegisterUserResource
