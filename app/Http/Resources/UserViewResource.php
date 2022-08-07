@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\URL;
 
 /** @mixin \App\Models\User */
 class UserViewResource extends JsonResource
@@ -18,7 +19,7 @@ class UserViewResource extends JsonResource
             'uuid' => $this->uuid,
             'name' => $this->name,
             'email' => $this->email,
-            'avatar' => $this->avatar,
+            'avatar' => URL::to($this->avatar),
         ];
     }
 }
