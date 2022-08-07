@@ -10,11 +10,11 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
     <!-- Scripts -->
-    @routes
     @vite(['resources/js/app.js'])
-    @inertiaHead
 </head>
 <body>
-@inertia
+<div class="container">
+    <h1>Api only</h1>
+</div>
 </body>
 </html>
