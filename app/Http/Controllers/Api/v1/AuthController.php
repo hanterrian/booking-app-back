@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\Auth\LoginFormRequest;
 use App\Http\Requests\Api\v1\Auth\RegisterFormRequest;
 use App\Http\Resources\AuthRegisterUserResource;
+use App\Http\Resources\UserViewResource;
+use App\Models\User;
 use App\Services\AdminAuthService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -14,6 +16,11 @@ class AuthController extends Controller
 {
     public function __construct(private readonly AdminAuthService $adminAuthService)
     {
+    }
+
+    public function view(): UserViewResource
+    {
+        return new UserViewResource($this->adminAuthService->getUser());
     }
 
     public function login(LoginFormRequest $request): string

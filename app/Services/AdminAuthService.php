@@ -14,6 +14,11 @@ class AdminAuthService
     {
     }
 
+    public function getUser(): ?User
+    {
+        return auth()->user();
+    }
+
     public function check(LoginFormRequest $request): false|User
     {
         $user = $this->adminRepository->find($request->email);
