@@ -1,6 +1,9 @@
 <?php
 
-use App\Http\Controllers\Api\v1\AuthController;
+use App\Http\Controllers\Api\v1\AuthLoginController;
+use App\Http\Controllers\Api\v1\AuthLogoutController;
+use App\Http\Controllers\Api\v1\AuthRegisterController;
+use App\Http\Controllers\Api\v1\AuthViewController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,9 +24,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group(['prefix' => 'v1'], function () {
     Route::group(['prefix' => 'auth'], function () {
-        Route::post('login', [AuthController::class, 'login'])->name('auth.login');
-        Route::post('register', [AuthController::class, 'register'])->name('auth.register');
-        Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum')->name('auth.logout');
-        Route::post('view', [AuthController::class, 'view'])->middleware('auth:sanctum')->name('auth.view');
+        Route::post('login', AuthLoginController::class)->name('auth.login');
+        Route::post('register', AuthRegisterController::class)->name('auth.register');
+        Route::post('logout', AuthLogoutController::class)->middleware('auth:sanctum')->name('auth.logout');
+        Route::get('view', AuthViewController::class)->middleware('auth:sanctum')->name('auth.view');
     });
 });
